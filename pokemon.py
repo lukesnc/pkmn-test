@@ -3,63 +3,92 @@
 
 # Imports
 from type import Type
-from random import choice
+from random import choice, randint
 
-class Pokemon:
+class Pokemon(object):
+    # Consts
+    NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
+               'Bold','Docile','Relaxed','Impish','Lax','Timid',
+               'Hasty','Serious','Jolly','Naive','Modest','Mild',
+               'Quiet','Bashful','Rash','Calm','Gentle','Sassy',
+               'Careful','Quirky']
+    NATURE_MOD_INCREASE = 1.10
+    NATURE_MOD_DECREASE = 0.90
+
     # Attributes
     name = ''
-    nickname = ''
-    pokedexNum = None
+    pkdx_num = None
     type = '???'
     gender = None
-    nature = random.choice(['Adamant','Bashful','Bold',
-                            'Brave','Calm','Careful',
-                            'Docile','Gentle','Hardy','Hasty',
-                            'Impish','Jolly','Lax','Lonely',
-                            'Mild','Modest','Naive','Naughty',
-                            'Quiet','Quirky','Rash','Relaxed',
-                            'Sassy','Serious','Timid'])
+    nature = choice(NATURES)
+
+    # Attributes the player affects
+    nickname = ''
     ball = None
 
     # Base stats
-    bHp, bAtk, bDef, bSpAtk, bSpDef, bSpd = 6
+    base_stats = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
+    ivs = {'hp':randint(0,32),'atk':randint(0,32),'def':randint(0,32),'spAtk':randint(0,32),'spDef':randint(0,32),'spd':randint(0,32)}
 
     # Current stats
-    hp, attack, defnse, spAtk, spDef, speed = 6
+    stats = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
+    evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
     level = 1
-    exp = 0
+    exp = 1
     evolution = 0
     moves = []
 
     # Battle status (asleep, confused, etc.)
     status = None
-    heldItem = None
+    held_item = None
 
-    def __init__(self, name, pkdxNum, type, nickname='', gender=None, ball='Poke Ball', lvl=1, moves=[], item=None):
-        self.name = name
+    def __init__(self, nickname='', ball='Poke Ball'):
+        self.__set_stats()
         self.nickname = nickname
-        self.pokedexNum = pkdxNum
-        self.type = type
-        self.gender = gender
         self.ball = ball
-        self.level = lvl
-        self.moves = moves
-        self.heldItem = item
+
+    # Sets stats based on IVs and base stats
+    def __set_stats(self):
+        # Set hp
+        self.stats['hp'] = int((((2 * self.base_stats['hp'] + self.ivs['hp'] + (self.evs['hp']/4) * self.level) / 100) + self.level + 10))
+
+        # Set the rest
+        for stat in self.stats:
+            if stat != 'hp':
+                self.stats[stat] = int(((((2 * self.base_stats[stat] + self.ivs[stat] + (self.evs[stat]/4) * self.level) / 100) + 5) * self.__nature_mod(stat)))
+
+    def __nature_mod(self, stat):
+        if stat == 'atk':
+            if self.nature in ['Lonely','Brave','Adamant','Naughty']:
+                return NATURE_MOD_INCREASE
+            elif self.nature in ['Bold','Timid','Modest','Calm']:
+                return NATURE_MOD_DECREASE
+
+            
+
+    def gain_exp(self, points):
+        pass
+
+    def __level_up(self):
+        pass
+
+    def give_item(self, item):
+        pass
 
     def show_stats(self):
         print("Name:", self.name)
         print("Nickname:", self.nickname)
-        print("Pokedex #:", self.pokedexNum)
+        print("Pokedex #:", self.pkdx_num)
         print("Type(s):", self.type)
         print("Gender:", self.gender)
-        print("Nature:", self.nature)
+        print("Nature:", self.nature, '(' + str(self.NATURES.index(self.nature)) + ')')
         print("Ball:", self.ball)
-        print("HP:", self.hp)
-        print("Attack:", self.attack)
-        print("Defense:", self.defense)
-        print("Sp. Attack:", self.spAtk)
-        print("Sp. Defense:", self.spDef)
-        print("Speed:", self.speed)
+        print("HP:", self.stats['hp'])
+        print("Attack:", self.stats['atk'])
+        print("Defense:", self.stats['def'])
+        print("Sp. Attack:", self.stats['spAtk'])
+        print("Sp. Defense:", self.stats['spDef'])
+        print("Speed:", self.stats['spd'])
         print("Level:", self.level)
         print("Exp. Points:", self.exp)
         print("Moves:", self.moves)
