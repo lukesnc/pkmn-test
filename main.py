@@ -5,16 +5,16 @@
 
 # Imports
 import sys
-from bulbasaur import Bulbasaur
-
+from random import random
+from pokemon import Pokemon
 # Global vars
 
 # Main
 class Start():
     def __init__(self):
         # Test with Bulbasaur
-        bro = Bulbasaur("my man")
-        bro.show_stats()
+        # bulbasaur = Pokemon('Bulbasaur', 1, 'Grass/Poison', ('M' if random() < .875 else 'F'), 5, ['Tackle','Growl'])
+        bulbasaur.show_stats()
 
 
 if __name__ == '__main__':

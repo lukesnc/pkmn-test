@@ -5,9 +5,10 @@
 from type import Type
 from random import choice
 
-class Pokemon(object):
+class Pokemon:
     # Attributes
-    name, nickname = ""
+    name = ''
+    nickname = ''
     pokedexNum = None
     type = '???'
     gender = None
@@ -21,10 +22,10 @@ class Pokemon(object):
     ball = None
 
     # Base stats
-    bHp, bAtk, bDef, bSpAtk, bSpDef, bSpd = None
+    bHp, bAtk, bDef, bSpAtk, bSpDef, bSpd = 6
 
     # Current stats
-    hp, atk, def, spAtk, spDef, spd = None
+    hp, attack, defnse, spAtk, spDef, speed = 6
     level = 1
     exp = 0
     evolution = 0
@@ -34,10 +35,16 @@ class Pokemon(object):
     status = None
     heldItem = None
 
-    def __init__(self, nn="", ball="Poke Ball", lvl=1):
-        self.nickname = nn
+    def __init__(self, name, pkdxNum, type, nickname='', gender=None, ball='Poke Ball', lvl=1, moves=[], item=None):
+        self.name = name
+        self.nickname = nickname
+        self.pokedexNum = pkdxNum
+        self.type = type
+        self.gender = gender
         self.ball = ball
         self.level = lvl
+        self.moves = moves
+        self.heldItem = item
 
     def show_stats(self):
         print("Name:", self.name)
