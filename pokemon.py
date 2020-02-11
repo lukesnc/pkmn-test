@@ -5,16 +5,17 @@
 from type import Type
 from random import choice, randint
 
-class Pokemon(object):
-    # Consts
-    NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
-               'Bold','Docile','Relaxed','Impish','Lax','Timid',
-               'Hasty','Serious','Jolly','Naive','Modest','Mild',
-               'Quiet','Bashful','Rash','Calm','Gentle','Sassy',
-               'Careful','Quirky']
-    NATURE_MOD_INCREASE = 1.10
-    NATURE_MOD_DECREASE = 0.90
+# Consts
+NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
+           'Bold','Docile','Relaxed','Impish','Lax','Timid',
+           'Hasty','Serious','Jolly','Naive','Modest','Mild',
+           'Quiet','Bashful','Rash','Calm','Gentle','Sassy',
+           'Careful','Quirky']
+NATURE_MOD_INCREASE = 1.10
+NATURE_MOD_DECREASE = 0.90
+NATURE_MOD_NONE = 1.0
 
+class Pokemon(object):
     # Attributes
     name = ''
     pkdx_num = None
@@ -59,12 +60,37 @@ class Pokemon(object):
 
     def __nature_mod(self, stat):
         if stat == 'atk':
-            if self.nature in ['Lonely','Brave','Adamant','Naughty']:
+            if self.nature in NATURES[1:5]:
                 return NATURE_MOD_INCREASE
-            elif self.nature in ['Bold','Timid','Modest','Calm']:
+            elif self.nature in NATURES[5::5]:
                 return NATURE_MOD_DECREASE
 
-            
+        elif stat == 'def':
+            if self.nature in NATURES[5:10] and not 'Docile':
+                return NATURE_MOD_INCREASE
+            elif self.nature in []:
+                return NATURE_MOD_DECREASE
+
+        elif stat == 'spd':
+            if self.nature in NATURES[10:15] and not 'Serious':
+                return NATURE_MOD_INCREASE
+            elif self.nature in []:
+                return NATURE_MOD_DECREASE
+
+        elif stat == 'spAtk':
+            if self.nature in NATURES[15:20] and not 'Bashful':
+                return NATURE_MOD_INCREASE
+            elif self.nature in []:
+                return NATURE_MOD_DECREASE
+
+        elif stat == 'spDef':
+            if self.nature in NATURES[20:24]:
+                return NATURE_MOD_INCREASE
+            elif self.nature in []:
+                return NATURE_MOD_DECREASE
+
+        else:
+            return NATURE_MOD_NONE
 
     def gain_exp(self, points):
         pass
