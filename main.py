@@ -5,8 +5,7 @@
 
 # Imports
 import sys
-from random import random
-from pokemon import Pokemon
+from pokemon import Bulbasaur
 
 # Global vars
 
@@ -14,7 +13,7 @@ from pokemon import Pokemon
 class Start():
     def __init__(self):
         # Test with Bulbasaur
-        boy = Pokemon('my man', 'Master Ball')
+        boy = Bulbasaur('my guy', 'Great Ball')
         boy.show_stats()
 
 
