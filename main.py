@@ -16,6 +16,10 @@ class Start():
         boy = Bulbasaur('my guy', 'Great Ball')
         boy.show_stats()
 
+        # "Battle"
+        input()
+        boy.gain_exp(150)
+
 
 if __name__ == '__main__':
     s = Start()

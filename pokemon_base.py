@@ -112,10 +112,41 @@ class Pokemon(object):
 
     def gain_exp(self, points):
         print(self.name, "gained", points, "Exp. Points!")
-        
+        self.exp += points
+        input()
+        if points > self.exp_to_next_lvl:
+            self.__level_up()
+            extra = points - self.exp_to_next_lvl
+            self.__set_exp(extra)
+        else:
+            self.exp_to_next_lvl -= points
 
     def __level_up(self):
-        pass
+        self.level += 1
+        print(self.name, "grew to Lv.", str(self.level) + "!")
+
+        old_hp = self.stats['hp']
+        old_atk = self.stats['atk']
+        old_def = self.stats['def']
+        old_spAtk = self.stats['spAtk']
+        old_spDef = self.stats['spDef']
+        old_spd = self.stats['spd']
+        self.__set_stats()
+
+        input()
+        print("Max HP    +" + str(self.stats['hp'] - old_hp))
+        print("Attack    +" + str(self.stats['atk'] - old_atk))
+        print("Defense   +" + str(self.stats['def'] - old_def))
+        print("Sp. Atk   +" + str(self.stats['spAtk'] - old_spAtk))
+        print("Sp. Def   +" + str(self.stats['spDef'] - old_spDef))
+        print("Speed     +" + str(self.stats['spd'] - old_spd))
+        input()
+        print("Max HP    " + str(self.stats['hp']))
+        print("Attack    " + str(self.stats['atk']))
+        print("Defense   " + str(self.stats['def']))
+        print("Sp. Atk   " + str(self.stats['spAtk']))
+        print("Sp. Def   " + str(self.stats['spDef']))
+        print("Speed     " + str(self.stats['spd']))
 
     def show_stats(self):
         print("Name:       ", self.name)
@@ -125,7 +156,7 @@ class Pokemon(object):
         print("Gender:     ", self.gender)
         print("Nature:     ", self.nature, '(' + str(NATURES.index(self.nature)) + ')')
         print("Ball:       ", self.ball)
-        print("HP:         ", self.stats['hp'], 'IV:', self.ivs['hp'], 'Base:', self.base_stats['hp'])
+        print("Max HP:     ", self.stats['hp'], 'IV:', self.ivs['hp'], 'Base:', self.base_stats['hp'])
         print("Attack:     ", self.stats['atk'], 'IV:', self.ivs['atk'], 'Base:', self.base_stats['atk'])
         print("Defense:    ", self.stats['def'], 'IV:', self.ivs['def'], 'Base:', self.base_stats['def'])
         print("Sp. Attack: ", self.stats['spAtk'], 'IV:', self.ivs['spAtk'], 'Base:', self.base_stats['spAtk'])
