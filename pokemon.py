@@ -10,15 +10,14 @@ class Bulbasaur(Pokemon):
     name = "Bulbasaur"
     type = "Grass/Poison"
     gender = 'M' if random.random() < .875 else 'F'
-    pkdx_num = 1
+    pokedex_num = 1
     evolution = 0
 
     # Base stats
     base_stats = {'hp':45,'atk':49,'def':49,'spAtk':65,'spDef':65,'spd':45}
 
     def __init__(self, nickname='', ball='Poke Ball'):
-        self.exp = 264
-        self.level = 100
+        self.level = random.randint(4, 7)
         self.evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
         self.moves = ['Tackle', 'Growl']
 

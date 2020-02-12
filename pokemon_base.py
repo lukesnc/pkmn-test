@@ -14,11 +14,12 @@ NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
 NATURE_MOD_INCREASE = 1.10
 NATURE_MOD_DECREASE = 0.90
 NATURE_MOD_NONE = 1.0
+EXP_MOD = 3
 
 class Pokemon(object):
     # Attributes
     name = ''
-    pkdx_num = None
+    pokedex_num = None
     type = '???'
     gender = None
     nature = choice(NATURES)
@@ -36,6 +37,7 @@ class Pokemon(object):
     evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
     level = 1
     exp = 0
+    exp_to_next_lvl = 0
     evolution = 0
     moves = []
 
@@ -44,19 +46,24 @@ class Pokemon(object):
     held_item = None
 
     def __init__(self, nickname='', ball='Poke Ball'):
+        # Take catch args
         self.nickname = nickname
         self.ball = ball
+
+        # Set stats
         self.__set_stats()
+        self.__set_exp()
 
     # Sets stats based on IVs and base stats
+    # Formulas found at bulbapedia.bulbagarden.net/wiki/Individual_values
     def __set_stats(self):
         # Set hp
-        self.stats['hp'] = (int((2 * self.base_stats['hp'] + self.ivs['hp'] + (self.evs['hp']/4) * self.level) / 100) + self.level + 10)
+        self.stats['hp'] = int(((2 * self.base_stats['hp'] + self.ivs['hp'] + int(self.evs['hp']/4)) * self.level) / 100) + self.level + 10
 
         # Set the rest
         for stat in self.stats:
             if stat != 'hp':
-                self.stats[stat] = int((int((2 * self.base_stats[stat] + self.ivs[stat] + (self.evs[stat]/4) * self.level) / 100) + 5) * 1.0)
+                self.stats[stat] = int((int(((2 * self.base_stats[stat] + self.ivs[stat] + int(self.evs[stat]/4)) * self.level) / 100) + 5) * self.__get_nature_mod(stat))
 
     def __get_nature_mod(self, stat):
         if stat == 'atk':
@@ -64,41 +71,56 @@ class Pokemon(object):
                 return NATURE_MOD_INCREASE
             elif self.nature in NATURES[5::5]:
                 return NATURE_MOD_DECREASE
+            else:
+                return NATURE_MOD_NONE
 
         elif stat == 'def':
             if self.nature in NATURES[5:10] and self.nature != 'Docile':
                 return NATURE_MOD_INCREASE
             elif self.nature in ['Lonely','Hasty','Mild','Gentle']:
                 return NATURE_MOD_DECREASE
+            else:
+                return NATURE_MOD_NONE
 
         elif stat == 'spd':
             if self.nature in NATURES[10:15] and self.nature != 'Serious':
                 return NATURE_MOD_INCREASE
             elif self.nature in ['Brave','Relaxed','Quiet','Sassy']:
                 return NATURE_MOD_DECREASE
+            else:
+                return NATURE_MOD_NONE
 
         elif stat == 'spAtk':
             if self.nature in NATURES[15:20] and self.nature != 'Bashful':
                 return NATURE_MOD_INCREASE
             elif self.nature in ['Adamant','Impish','Jolly','Careful']:
                 return NATURE_MOD_DECREASE
+            else:
+                return NATURE_MOD_NONE
 
         elif stat == 'spDef':
             if self.nature in NATURES[20:24]:
                 return NATURE_MOD_INCREASE
             elif self.nature in NATURES[4::5] and self.nature != 'Quirky':
                 return NATURE_MOD_DECREASE
+            else:
+                return NATURE_MOD_NONE
 
-        else:
-            return NATURE_MOD_NONE
+    def __set_exp(self, extra_points=0):
+        self.exp = pow(self.level, EXP_MOD) + extra_points
+        self.exp_to_next_lvl = pow(self.level + 1, EXP_MOD) - self.exp
 
-    def __set_level(self):
+    def gain_exp(self, points):
+        print(self.name, "gained", points, "Exp. Points!")
+        
+
+    def __level_up(self):
         pass
 
     def show_stats(self):
         print("Name:       ", self.name)
         print("Nickname:   ", self.nickname)
-        print("Pokedex #:  ", self.pkdx_num)
+        print("Pokedex #:  ", self.pokedex_num)
         print("Type(s):    ", self.type)
         print("Gender:     ", self.gender)
         print("Nature:     ", self.nature, '(' + str(NATURES.index(self.nature)) + ')')
@@ -110,16 +132,13 @@ class Pokemon(object):
         print("Sp. Defense:", self.stats['spDef'], 'IV:', self.ivs['spDef'], 'Base:', self.base_stats['spDef'])
         print("Speed:      ", self.stats['spd'], 'IV:', self.ivs['spd'], 'Base:', self.base_stats['spd'])
         print("Level:      ", self.level)
-        print("Exp. Points:", self.exp)
+        print("Exp. Points:", self.exp, "To next:", self.exp_to_next_lvl)
         print("Moves:      ", self.moves)
 
     def fight(self):
         pass
 
     def run(self):
-        pass
-
-    def gain_exp(self, points):
         pass
 
     def give_item(self, item):
