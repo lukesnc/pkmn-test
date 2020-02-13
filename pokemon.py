@@ -6,23 +6,11 @@ import random
 from pokemon_base import Pokemon
 
 class Bulbasaur(Pokemon):
-    # Attributes
-    name = "Bulbasaur"
-    type = "Grass/Poison"
-    gender = 'M' if random.random() < .875 else 'F'
-    pokedex_num = 1
-    evolution = 0
+    # Attributes / stats
+    # Redo this
+    BASE_STATS = {'hp':45,'atk':49,'def':49,'spAtk':65,'spDef':65,'spd':45}
 
-    # Base stats
-    base_stats = {'hp':45,'atk':49,'def':49,'spAtk':65,'spDef':65,'spd':45}
-
-    def __init__(self, nickname='', ball='Poke Ball'):
-        self.level = random.randint(4, 7)
-        self.evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
-        self.moves = ['Tackle', 'Growl']
-
-        self.status = None
-        self.held_item = None
-
-        # Comes last
-        super(Bulbasaur, self).__init__(nickname, ball)
+    def __init__(self):
+        level = random.randint(4, 7)
+        super(Bulbasaur, self).__init__(level)
+        self._moves = ['Tackle', 'Growl']
