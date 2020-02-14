@@ -5,27 +5,35 @@
 import random
 from type import Type
 
-# For calculating exp. points
-
+NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
+           'Bold','Docile','Relaxed','Impish','Lax','Timid',
+           'Hasty','Serious','Jolly','Naive','Modest','Mild',
+           'Quiet','Bashful','Rash','Calm','Gentle','Sassy',
+           'Careful','Quirky']
+NATURE_MOD_INCREASE = 1.10
+NATURE_MOD_DECREASE = 0.90
+NATURE_MOD_NONE = 1.0
 
 class Pokemon(object):
     # Static class variables
-    NAME = ''
-    CLASSIFICATION = ''
-    POKEDEX_NUM = None
-    TYPE = '???'
-    CHANCE_IS_MALE = 0.5
-    CAPTURE_RATE = 0
-    HEIGHT = 0 #m
-    WEIGHT = 0 #kg
-    BASE_EGG_STEPS = 0
-    EV_EARNED = {'stat':0}
-    BASE_STATS = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
-    EVOLUTION = 0
+    name = ''
+    classification = ''
+    pokedex_num = None
+    type = '???'
+    chance_is_male = 0.5
+    capture_rate = 0
+    height = 0 #m
+    weight = 0 #kg
+    base_egg_steps = 0
+    ev_earned = {'stat':0}
+    base_stats = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
+    evolution = 0
+    abilities = []
 
-    def __init__(self, level):
+    def __init__(self):
         # Set stats
-        self._nature = self._get_nature()
+        self._nature = random.choice(NATURES)
+        self._ability = random.choice(abilities)
         self._ivs = {
             'hp':random.randint(0,32),
             'atk':random.randint(0,32),
@@ -35,7 +43,7 @@ class Pokemon(object):
             'spd':random.randint(0,32)
         }
 
-        self._gender = self._get_gender(CHANCE_IS_MALE)
+        self._gender = self._get_gender(self.chance_is_male)
         self._evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
         self._level = level
         self._exp = None
@@ -59,15 +67,6 @@ class Pokemon(object):
         self.status = None
         self.held_item = None
 
-
-    def _get_nature(self):
-        NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
-                   'Bold','Docile','Relaxed','Impish','Lax','Timid',
-                   'Hasty','Serious','Jolly','Naive','Modest','Mild',
-                   'Quiet','Bashful','Rash','Calm','Gentle','Sassy',
-                   'Careful','Quirky']
-        return random.choice(NATURES)
-
     # Sets stats based on IVs and base stats
     # Formulas found at bulbapedia.bulbagarden.net/wiki/Individual_values
     def _generate_stat(self, stat):
@@ -83,10 +82,6 @@ class Pokemon(object):
             return 'F'
 
     def _get_nature_mod(self, stat):
-        NATURE_MOD_INCREASE = 1.10
-        NATURE_MOD_DECREASE = 0.90
-        NATURE_MOD_NONE = 1.0
-
         if stat == 'atk':
             if self._nature in NATURES[1:5]:
                 return NATURE_MOD_INCREASE
@@ -128,10 +123,8 @@ class Pokemon(object):
                 return NATURE_MOD_NONE
 
     def _set_exp(self, extra_points=0):
-        EXP_MOD = 3
-
-        self._exp = pow(self._level, EXP_MOD) + extra_points
-        self._exp_to_next_lvl = pow(self._level + 1, EXP_MOD) - self._exp
+        self._exp = pow(self._level, 3) + extra_points
+        self._exp_to_next_lvl = pow(self._level + 1, 3) - self._exp
 
     def _caught(self, ball):
         print("Successfully caught", self.name + '!')

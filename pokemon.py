@@ -7,10 +7,21 @@ from pokemon_base import Pokemon
 
 class Bulbasaur(Pokemon):
     # Attributes / stats
-    # Redo this
-    BASE_STATS = {'hp':45,'atk':49,'def':49,'spAtk':65,'spDef':65,'spd':45}
+    name = 'Bulbasaur'
+    classification = 'Seed Pokemon'
+    pokedex_num = 1
+    type = 'Grass/Poison'
+    chance_is_male = .8814
+    capture_rate = 45
+    height = 0.7
+    weight = 6.9
+    base_egg_steps = 5120
+    ev_earned = {'spAtk':1}
+    base_stats = {'hp':45,'atk':49,'def':49,'spAtk':65,'spDef':65,'spd':45}
+    evolution = 0
+    abilities = ['Overgrow', 'Chlorophyll']
 
     def __init__(self):
-        level = random.randint(4, 7)
-        super(Bulbasaur, self).__init__(level)
+        super(Bulbasaur, self).__init__()
         self._moves = ['Tackle', 'Growl']
+        self._level = random.randint(4, 7)
