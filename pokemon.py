@@ -3,7 +3,7 @@
 
 # Imports
 import random
-from pokemon_base import Pokemon
+from pokemonbase import Pokemon
 
 class Bulbasaur(Pokemon):
     # Attributes / stats
