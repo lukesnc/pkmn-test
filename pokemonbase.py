@@ -5,6 +5,11 @@
 import random
 from type import Type
 from statconsts import *
+from datetime import datetime
+import logging
+
+LOG_PATH = './logs/pokemon-' + str(datetime.now()) + '.log'
+logger = logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
 
 class Pokemon(object):
     # Static class variables
@@ -140,8 +145,11 @@ class Pokemon(object):
         else:
             self._exp_to_next_lvl -= points
 
-    def get_status():
+    def get_status(self):
         return self._status
+
+    def get_held_item(self):
+        return self._held_item
 
     def _level_up(self):
         self._level += 1
@@ -170,26 +178,26 @@ class Pokemon(object):
         print("Sp. Def   " + str(self._stats['spDef']))
         print("Speed     " + str(self._stats['spd']))
 
-    def show_stats(self):
-        print("Name:       ", self.name)
-        print("Nickname:   ", self._nickname)
-        print("Pokedex #:  ", self.pokedex_num)
-        print("Class:      ", self.classification)
-        print("Height:     ", str(self.height) + 'm')
-        print("Weight:     ", str(self.weight) + 'kg')
-        print("Type(s):    ", self.type)
-        print("Gender:     ", self._gender)
-        print("Nature:     ", self._nature, '(' + str(NATURES.index(self._nature)) + ')')
-        print("Ball:       ", self._ball)
-        print("Max HP:     ", self._stats['hp'], 'IV:', self._ivs['hp'], 'Base:', self.base_stats['hp'])
-        print("Attack:     ", self._stats['atk'], 'IV:', self._ivs['atk'], 'Base:', self.base_stats['atk'])
-        print("Defense:    ", self._stats['def'], 'IV:', self._ivs['def'], 'Base:', self.base_stats['def'])
-        print("Sp. Attack: ", self._stats['spAtk'], 'IV:', self._ivs['spAtk'], 'Base:', self.base_stats['spAtk'])
-        print("Sp. Defense:", self._stats['spDef'], 'IV:', self._ivs['spDef'], 'Base:', self.base_stats['spDef'])
-        print("Speed:      ", self._stats['spd'], 'IV:', self._ivs['spd'], 'Base:', self.base_stats['spd'])
-        print("Level:      ", self._level)
-        print("Exp. Points:", self._exp, "To next:", self._exp_to_next_lvl)
-        print("Moves:      ", self._moves)
+    def log_stats(self):
+        logger.info("Name:       ", self.name)
+        logger.info("Nickname:   ", self._nickname)
+        logger.info("Pokedex #:  ", self.pokedex_num)
+        logger.info("Class:      ", self.classification)
+        logger.info("Height:     ", str(self.height) + 'm')
+        logger.info("Weight:     ", str(self.weight) + 'kg')
+        logger.info("Type(s):    ", self.type)
+        logger.info("Gender:     ", self._gender)
+        logger.info("Nature:     ", self._nature, '(' + str(NATURES.index(self._nature)) + ')')
+        logger.info("Ball:       ", self._ball)
+        logger.info("Max HP:     ", self._stats['hp'], 'IV:', self._ivs['hp'], 'Base:', self.base_stats['hp'])
+        logger.info("Attack:     ", self._stats['atk'], 'IV:', self._ivs['atk'], 'Base:', self.base_stats['atk'])
+        logger.info("Defense:    ", self._stats['def'], 'IV:', self._ivs['def'], 'Base:', self.base_stats['def'])
+        logger.info("Sp. Attack: ", self._stats['spAtk'], 'IV:', self._ivs['spAtk'], 'Base:', self.base_stats['spAtk'])
+        logger.info("Sp. Defense:", self._stats['spDef'], 'IV:', self._ivs['spDef'], 'Base:', self.base_stats['spDef'])
+        logger.info("Speed:      ", self._stats['spd'], 'IV:', self._ivs['spd'], 'Base:', self.base_stats['spd'])
+        logger.info("Level:      ", self._level)
+        logger.info("Exp. Points:", self._exp, "To next:", self._exp_to_next_lvl)
+        logger.info("Moves:      ", self._moves)
 
     def fight(self):
         pass

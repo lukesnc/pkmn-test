@@ -24,6 +24,7 @@ class Game():
 
         # Test with Bulbasaur
         boy = Bulbasaur()
+        boy.log_stats()
         boy.catch('cummy bear', 'Master Ball')
 
         # "Battle"
