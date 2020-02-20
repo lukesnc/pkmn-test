@@ -150,7 +150,4 @@ generate_stats = _s.generate_stats
 set_gender = _s.set_gender
 set_characteristic = _s.set_characteristic
 
-
-
-if __name__ == '__main__':
-    _test()
+del _s

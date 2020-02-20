@@ -1,5 +1,8 @@
 # Class file for Pokemon types
 # Author: Luke Simone
 
+# Imports
+
 class Type:
-    pass
+    def __init__(self):
+        pass
