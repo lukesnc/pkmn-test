@@ -5,10 +5,15 @@
 
 # Imports
 import sys
+from datetime import datetime
+import logging
+
 from pokemon import Bulbasaur
 from trainer import Trainer
 
 # Global vars
+LOG_PATH = './logs/pkmn-' + str(datetime.now()) + '.log'
+logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
 
 # Main
 class Game():
@@ -21,15 +26,17 @@ class Game():
         gender = Trainer.get_gender()
         name = Trainer.get_name()
         me = Trainer(name, gender)
+        me.log_info()
 
         # Test with Bulbasaur
         boy = Bulbasaur()
-        boy.log_stats()
-        boy.catch('cummy bear', 'Master Ball')
+        boy.catch('Master Ball')
 
         # "Battle"
         input()
         boy.gain_exp(150)
+
+        boy.log_stats()
 
 if __name__ == '__main__':
     g = Game()

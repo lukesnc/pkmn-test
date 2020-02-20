@@ -3,13 +3,11 @@
 
 # Imports
 import random
-from type import Type
-from statconsts import *
 from datetime import datetime
 import logging
 
-LOG_PATH = './logs/pokemon-' + str(datetime.now()) + '.log'
-logger = logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
+from type import Type
+from stats import *
 
 class Pokemon(object):
     # Static class variables
@@ -29,16 +27,10 @@ class Pokemon(object):
 
     def __init__(self):
         # Set stats
-        self._nature = random.choice(NATURES)
-        self._ability = random.choice(abilities)
-        self._ivs = {'hp':random.randint(0,32),
-                     'atk':random.randint(0,32),
-                     'def':random.randint(0,32),
-                     'spAtk':random.randint(0,32),
-                     'spDef':random.randint(0,32),
-                     'spd':random.randint(0,32)}
-
-        self._gender = self._get_gender(self.chance_is_male)
+        self._nature = generate_nature()
+        # self._ability = random.choice(abilities)
+        self._ivs = generate_ivs()
+        self._gender = set_gender(self.chance_is_male)
         self._evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
         self._level = 1
         self._exp = None
@@ -49,90 +41,36 @@ class Pokemon(object):
         self._ball = 'Poke Ball'
 
         # Must come last
-        self._stats = {'hp': self._generate_stat('hp'),
-                       'atk': self._generate_stat('atk'),
-                       'def': self._generate_stat('def'),
-                       'spAtk': self._generate_stat('spAtk'),
-                       'spDef': self._generate_stat('spDef'),
-                       'spd': self._generate_stat('spd')}
+        self._stats = generate_stats(self.base_stats, self._ivs, self._evs,
+                                     self._level, self._nature)
+
+        # Trainer info
+        self._date_met = str(datetime.now())
+        self._location_met = 'Route 1'
+        self._characteristic = set_characteristic()
 
         # Battle status (asleep, confused, etc.)
         self._status = None
         self._held_item = None
 
-    # Sets stats based on IVs and base stats
-    # Formulas found at bulbapedia.bulbagarden.net/wiki/Individual_values
-    def _generate_stat(self, stat):
-        if stat == 'hp':
-            return int(((2 * self.base_stats['hp'] + self._ivs['hp'] + int(self.evs['hp']/4)) * self._level) / 100) + self._level + 10
-        else:
-            return int((int(((2 * self.base_stats[stat] + self._ivs[stat] + int(self.evs[stat]/4)) * self._level) / 100) + 5) * self._get_nature_mod(stat))
-
-    def _get_gender(self, chance_is_male=0.5):
-        if random.random() < chance_is_male:
-            return 'M'
-        else:
-            return 'F'
-
-    def _get_nature_mod(self, stat):
-        if stat == 'atk':
-            if self._nature in NATURES[1:5]:
-                return NATURE_MOD_INCREASE
-            elif self._nature in NATURES[5::5]:
-                return NATURE_MOD_DECREASE
-            else:
-                return NATURE_MOD_NONE
-
-        elif stat == 'def':
-            if self._nature in NATURES[5:10] and self._nature != 'Docile':
-                return NATURE_MOD_INCREASE
-            elif self._nature in ['Lonely','Hasty','Mild','Gentle']:
-                return NATURE_MOD_DECREASE
-            else:
-                return NATURE_MOD_NONE
-
-        elif stat == 'spd':
-            if self._nature in NATURES[10:15] and self._nature != 'Serious':
-                return NATURE_MOD_INCREASE
-            elif self._nature in ['Brave','Relaxed','Quiet','Sassy']:
-                return NATURE_MOD_DECREASE
-            else:
-                return NATURE_MOD_NONE
-
-        elif stat == 'spAtk':
-            if self._nature in NATURES[15:20] and self._nature != 'Bashful':
-                return NATURE_MOD_INCREASE
-            elif self._nature in ['Adamant','Impish','Jolly','Careful']:
-                return NATURE_MOD_DECREASE
-            else:
-                return NATURE_MOD_NONE
-
-        elif stat == 'spDef':
-            if self._nature in NATURES[20:24]:
-                return NATURE_MOD_INCREASE
-            elif self._nature in NATURES[4::5] and self._nature != 'Quirky':
-                return NATURE_MOD_DECREASE
-            else:
-                return NATURE_MOD_NONE
-
     def _set_exp(self, extra_points=0):
         self._exp = pow(self._level, 3) + extra_points
         self._exp_to_next_lvl = pow(self._level + 1, 3) - self._exp
+
+    def catch(self, ball):
+        self._caught(ball)
 
     def _caught(self, ball):
         print("Successfully caught", self.name + '!')
         # Take catch args
         self._ball = ball
-        choice = input("Give", self.name, "a nickname? [yes/no] ").lower().strip()
+        choice = input("Give " + self.name + " a nickname? [yes/no] ").lower().strip()
         if choice == 'yes':
             nickname = input("Enter nickname: ").strip()
             if len(nickname) > 10:
                 print("Try again.\n")
                 self.catch()
             self._nickname = nickname
-
-    def catch(self, ball):
-        self._caught(ball)
 
     def gain_exp(self, points):
         print(self.name, "gained", points, "Exp. Points!")
@@ -145,10 +83,10 @@ class Pokemon(object):
         else:
             self._exp_to_next_lvl -= points
 
-    def get_status(self):
+    def set_status(self):
         return self._status
 
-    def get_held_item(self):
+    def set_held_item(self):
         return self._held_item
 
     def _level_up(self):
@@ -161,7 +99,8 @@ class Pokemon(object):
         old_spAtk = self._stats['spAtk']
         old_spDef = self._stats['spDef']
         old_spd = self._stats['spd']
-        self._set_stats()
+        self._stats = generate_stats(self.base_stats, self._ivs, self._evs,
+                                     self._level, self._nature)
 
         input()
         print("Max HP    +" + str(self._stats['hp'] - old_hp))
@@ -179,25 +118,30 @@ class Pokemon(object):
         print("Speed     " + str(self._stats['spd']))
 
     def log_stats(self):
-        logger.info("Name:       ", self.name)
-        logger.info("Nickname:   ", self._nickname)
-        logger.info("Pokedex #:  ", self.pokedex_num)
-        logger.info("Class:      ", self.classification)
-        logger.info("Height:     ", str(self.height) + 'm')
-        logger.info("Weight:     ", str(self.weight) + 'kg')
-        logger.info("Type(s):    ", self.type)
-        logger.info("Gender:     ", self._gender)
-        logger.info("Nature:     ", self._nature, '(' + str(NATURES.index(self._nature)) + ')')
-        logger.info("Ball:       ", self._ball)
-        logger.info("Max HP:     ", self._stats['hp'], 'IV:', self._ivs['hp'], 'Base:', self.base_stats['hp'])
-        logger.info("Attack:     ", self._stats['atk'], 'IV:', self._ivs['atk'], 'Base:', self.base_stats['atk'])
-        logger.info("Defense:    ", self._stats['def'], 'IV:', self._ivs['def'], 'Base:', self.base_stats['def'])
-        logger.info("Sp. Attack: ", self._stats['spAtk'], 'IV:', self._ivs['spAtk'], 'Base:', self.base_stats['spAtk'])
-        logger.info("Sp. Defense:", self._stats['spDef'], 'IV:', self._ivs['spDef'], 'Base:', self.base_stats['spDef'])
-        logger.info("Speed:      ", self._stats['spd'], 'IV:', self._ivs['spd'], 'Base:', self.base_stats['spd'])
-        logger.info("Level:      ", self._level)
-        logger.info("Exp. Points:", self._exp, "To next:", self._exp_to_next_lvl)
-        logger.info("Moves:      ", self._moves)
+        logging.info("POKEMON - " + str(self.name.upper()))
+        logging.info("Name:           " + str(self.name))
+        logging.info("Nickname:       " + str(self._nickname))
+        logging.info("Pokedex #:      " + str(self.pokedex_num))
+        logging.info("Class:          " + str(self.classification))
+        logging.info("Height:         " + str(self.height) + 'm')
+        logging.info("Weight:         " + str(self.weight) + 'kg')
+        logging.info("Type(s):        " + str(self.type))
+        logging.info("Gender:         " + str(self._gender))
+        logging.info("Nature:         " + str(self._nature))
+        logging.info("Ball:           " + str(self._ball))
+        logging.info("Max HP:         " + str(self._stats['hp']))
+        logging.info("Attack:         " + str(self._stats['atk']))
+        logging.info("Defense:        " + str(self._stats['def']))
+        logging.info("Sp. Attack:     " + str(self._stats['spAtk']))
+        logging.info("Sp. Defense:    " + str(self._stats['spDef']))
+        logging.info("Speed:          " + str(self._stats['spd']))
+        logging.info("Level:          " + str(self._level))
+        logging.info("Exp. Points:    " + str(self._exp) + " To next: " + str(self._exp_to_next_lvl))
+        logging.info("Moves:          " + str(self._moves))
+        logging.info("Date met:       " + str(self._date_met))
+        logging.info("Location met:   " + str(self._location_met))
+        logging.info("Characteristic: " + str(self._characteristic))
+        logging.info("\n")
 
     def fight(self):
         pass

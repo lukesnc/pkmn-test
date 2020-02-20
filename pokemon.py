@@ -3,6 +3,7 @@
 
 # Imports
 import random
+
 from pokemonbase import Pokemon
 
 class Bulbasaur(Pokemon):
