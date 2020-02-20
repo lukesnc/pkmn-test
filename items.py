@@ -12,11 +12,11 @@ class Item(object):
         self._quantity -= 1
 
 class Medicine(Item):
-    def __init__(self, name, desc, cost, type, hp_restored=0, status_cured=None):
+    def __init__(self, name, desc, cost, type, hp_rest=0, stat_cured=None):
         Item.__init__(self, name, desc, cost)
         self._type = type # HP or Status
-        self._hp_restored = hp_restored
-        self._status_cured = status_cured
+        self._hp_restored = hp_rest
+        self._status_cured = stat_cured
 
 class Ball(Item):
     def __init__(self, name, desc, cost, rate):
