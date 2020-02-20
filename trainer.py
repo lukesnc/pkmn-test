@@ -4,6 +4,7 @@
 # Imports
 from random import randint
 import logging
+import items
 
 class Trainer:
     def __init__(self, name, gender):
@@ -12,7 +13,12 @@ class Trainer:
         self._has_pokedex = False
         self._secret_id = randint(1, 99999)
         self._trainer_id = randint(1, 99999) + self._secret_id * 65536
-        self._bag = {}
+        # Bag and pockets
+        self._bag = {'Items': {},
+                     'Medicine': {items.potion:1},
+                     'Balls': {items.poke_ball:5},
+                     'Battle Items': {},
+                     'Key Items': ['Town Map']}
         self._pokemon = []
 
     @staticmethod

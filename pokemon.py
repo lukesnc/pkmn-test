@@ -23,6 +23,6 @@ class Bulbasaur(Pokemon):
     abilities = ['Overgrow', 'Chlorophyll']
 
     def __init__(self):
-        super(Bulbasaur, self).__init__()
+        Pokemon.__init__(self)
         self._moves = ['Tackle', 'Growl']
         self._level = random.randint(4, 7)

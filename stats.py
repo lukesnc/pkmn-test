@@ -14,21 +14,24 @@ NATURE_MOD_INCREASE = 1.10
 NATURE_MOD_DECREASE = 0.90
 NATURE_MOD_NONE = 1.0
 
-HP_CHARACTERISTICS = ['Loves to eat','Often dozes off',
-                      'Often scatters things','Scatters things often',
-                      'Likes to Relax']
-ATK_CHARACTERISTICS = ['Proud of its power','Likes to thrash about',
-                       'A little quick tempered','Likes to fight',
-                       'Quick Tempered']
-DEF_CHARACTERISTICS = ['Sturdy body','Capable of taking hits',
-                       'Highly persistent','Good endurance',
-                       'Good perseverance']
-SPATK_CHARACTERISTICS = ['Highly curious','Mischievous','Thoroughly Cunning',
-                         'Often lost in thought','Very finicky']
-SPDEF_CHARACTERISTICS = ['Strong willed','Somewhat vain','Strongly defiant',
-                         'Hates to lose','Somewhat stubborn']
-SPD_CHARACTERISTICS = ['Likes to run','Alert to sounds','Impetuous and silly',
-                       'Somewhat of a clown','Quick to flee']
+CHARACTERISTICS = {'hp': ['Loves to eat','Often dozes off',
+                          'Often scatters things','Scatters things often',
+                          'Likes to Relax'],
+                   'atk': ['Proud of its power','Likes to thrash about',
+                           'A little quick tempered','Likes to fight',
+                           'Quick Tempered'],
+                   'def': ['Sturdy body','Capable of taking hits',
+                           'Highly persistent','Good endurance',
+                           'Good perseverance'],
+                   'spAtk': ['Highly curious','Mischievous',
+                             'Thoroughly Cunning','Often lost in thought',
+                             'Very finicky'],
+                   'spDef': ['Strong willed','Somewhat vain',
+                             'Strongly defiant','Hates to lose',
+                             'Somewhat stubborn'],
+                   'spd': ['Likes to run','Alert to sounds',
+                           'Impetuous and silly','Somewhat of a clown',
+                           'Quick to flee']}
 
 class Stats:
     def __init__(self):
@@ -57,11 +60,14 @@ class Stats:
         return temp # Dictionary
 
     # Generates the Pokemons gender, default is 50/50
-    def set_gender(self, chance_is_male=0.5):
-        if random.random() < chance_is_male:
-            return 'M'
-        else:
-            return 'F'
+    def set_gender(self, chance_is_male):
+        try:
+            if random.random() < chance_is_male:
+                return 'M'
+            else:
+                return 'F'
+        except:
+            return None
 
     # Gets a particular stats modifier based on the nature (10% inc or dec)
     def _set_nature_mod(self, stat, nature):
@@ -107,9 +113,23 @@ class Stats:
 
     # Gets a Pokemons characteristic based on their iv values
     def set_characteristic(self, ivs):
+        highest_iv = 'hp'
         for k,v in ivs.items():
-            max = max(ivs[k])
-            # FINISH THIS
+            if ivs[highest_iv] < v:
+                highest_iv = k
+
+        for k,v in ivs.items():
+            if ivs[k] == highest_iv:
+                if v in range(0, 31, 5):
+                    return CHARACTERISTICS[k][0]
+                elif v in range(1, 32, 5):
+                    return CHARACTERISTICS[k][1]
+                elif v in range(2, 28, 5):
+                    return CHARACTERISTICS[k][2]
+                elif v in range(3, 29, 5):
+                    return CHARACTERISTICS[k][3]
+                elif v in range(4, 30, 5):
+                    return CHARACTERISTICS[k][4]
 
 
 # Test functionality

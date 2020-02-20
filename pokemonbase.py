@@ -28,7 +28,7 @@ class Pokemon(object):
     def __init__(self):
         # Set stats
         self._nature = generate_nature()
-        # self._ability = random.choice(abilities)
+        self._ability = random.choice(self.abilities)
         self._ivs = generate_ivs()
         self._gender = set_gender(self.chance_is_male)
         self._evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
@@ -47,7 +47,7 @@ class Pokemon(object):
         # Trainer info
         self._date_met = str(datetime.now())
         self._location_met = 'Route 1'
-        self._characteristic = set_characteristic()
+        self._characteristic = set_characteristic(self._ivs)
 
         # Battle status (asleep, confused, etc.)
         self._status = None
@@ -128,6 +128,7 @@ class Pokemon(object):
         logging.info("Type(s):        " + str(self.type))
         logging.info("Gender:         " + str(self._gender))
         logging.info("Nature:         " + str(self._nature))
+        logging.info("Ability:        " + str(self._ability))
         logging.info("Ball:           " + str(self._ball))
         logging.info("Max HP:         " + str(self._stats['hp']))
         logging.info("Attack:         " + str(self._stats['atk']))

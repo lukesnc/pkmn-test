@@ -10,6 +10,7 @@ import logging
 
 from pokemon import Bulbasaur
 from trainer import Trainer
+import items
 
 # Global vars
 LOG_PATH = './logs/pkmn-' + str(datetime.now()) + '.log'
@@ -18,7 +19,6 @@ logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
 # Main
 class Game():
     def __init__(self):
-        # Create trainer
         print("Hello and welcome to the world of Pokemon!")
         input()
         print("Why don't you tell me a little bit about yourself.")
