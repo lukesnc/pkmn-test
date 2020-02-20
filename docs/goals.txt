@@ -1,0 +1,7 @@
+GOALS
+
+create a trainer
+catch wild pokemon
+train pokemon
+battle with pokemon
+store pokemon in pc box
