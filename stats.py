@@ -119,7 +119,7 @@ class Stats:
                 highest_iv = k
 
         for k,v in ivs.items():
-            if ivs[k] == highest_iv:
+            if k == highest_iv:
                 if v in range(0, 31, 5):
                     return CHARACTERISTICS[k][0]
                 elif v in range(1, 32, 5):
