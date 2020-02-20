@@ -1,0 +1,13 @@
+what can a pokemon do?
+
+fight
+level up
+evolve
+be caught
+hold an item
+
+what can a trainer do?
+catch pokemon
+use the pc
+run
+use items in battle
