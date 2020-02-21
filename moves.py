@@ -3,6 +3,7 @@
 
 # Imports
 from random import random
+import logging
 
 # Attack moves class
 class Move(object):
@@ -32,9 +33,24 @@ class StatusMove(Move):
         Move.__init__(self, num, name, type, 'Status', pp, None, acc)
         self._effect = effect
 
+def _test(move):
+    logging.info("MOVE - " + str(move._name))
+    logging.info("Number:   " + str(move._number))
+    logging.info("Type:     " + str(move._type))
+    logging.info("Category: " + str(move._category))
+    logging.info("PP:       " + str(move._pp))
+    logging.info("Power:    " + str(move._power))
+    logging.info("Accuracy: " + str(move._accuracy))
+    logging.info("\n")
+
 # Moves
 pound = Move(1, 'Pound', 'Normal', 'Physical', 35, 40, 1.0)
 tackle = Move(33, 'Tackle', 'Normal', 'Physical', 35, 40, 1.0)
 ember = Move(52, 'Ember', 'Fire', 'Special', 25, 40, 1.0)
 poison_powder = StatusMove(77, 'Poison Powder', 'Poison', 35, 'Posion', 0.75)
 thunder = Move(87, 'Thunder', 'Electric', 'Special', 10, 110, 0.7)
+
+if __name__ == '__main__':
+    _test(ember)
+    _test(thunder)
+    _test(poison_powder)

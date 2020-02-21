@@ -11,31 +11,25 @@ import logging
 from pokemon import Bulbasaur
 from trainer import Trainer
 import items
+import moves
+import stats
 
 # Global vars
-LOG_PATH = './logs/pkmn-' + str(datetime.now()) + '.log'
+LOG_PATH = './logs/pkmn-' + str(datetime.now()) + '.txt'
 logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
 
-# Main
 class Game():
     def __init__(self):
         print("Hello and welcome to the world of Pokemon!")
         input()
         print("Why don't you tell me a little bit about yourself.")
         input()
-        gender = Trainer.get_gender()
-        name = Trainer.get_name()
-        me = Trainer(name, gender)
+        me = Trainer('Luke', 'M')
         me.log_info()
 
         # Test with Bulbasaur
         boy = Bulbasaur()
-        boy.catch('Master Ball')
-
-        # "Battle"
-        input()
-        boy.gain_exp(150)
-
+        boy.catch('Great Ball') # CHANGE TO GREAT BALL ITEM
         boy.log_stats()
 
 if __name__ == '__main__':

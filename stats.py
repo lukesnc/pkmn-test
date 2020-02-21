@@ -4,6 +4,9 @@
 # Imports
 import random
 
+__all__ = ['generate_nature','generate_ivs','generate_stats',
+           'set_gender','set_characteristic']
+
 # Constants
 NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
            'Bold','Docile','Relaxed','Impish','Lax','Timid',
@@ -134,12 +137,24 @@ class Stats:
 
 # Test functionality
 def _test():
-    print("Max HP:     ")
-    print("Attack:     ")
-    print("Defense:    ")
-    print("Sp. Attack: ")
-    print("Sp. Defense:")
-    print("Speed:      ")
+    # Charizard
+    _bs = {'hp':78,'atk':84,'def':78,'spAtk':109,'spDef':85,'spd':100}
+    _evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
+    _n = generate_nature()
+    _ivs = generate_ivs()
+    _s = generate_stats(_bs, _ivs, _evs, 50, _n)
+    _g = set_gender(.875)
+    _c = set_characteristic(_ivs)
+    print("nature:", _n)
+    print("gender:", _g)
+    print("char:  ", _c)
+    print("hp:    ", _s['hp'], "iv: ", _ivs['hp'])
+    print("atk:   ", _s['atk'], "iv: ", _ivs['atk'])
+    print("def:   ", _s['def'], "iv: ", _ivs['def'])
+    print("spAtk: ", _s['spAtk'], "iv: ", _ivs['spAtk'])
+    print("spDef: ", _s['spDef'], "iv: ", _ivs['spDef'])
+    print("spd:   ", _s['spd'], "iv: ", _ivs['spd'])
+
 
 
 # Public package
@@ -151,3 +166,6 @@ set_gender = _s.set_gender
 set_characteristic = _s.set_characteristic
 
 del _s
+
+if __name__ == '__main__':
+    _test()
