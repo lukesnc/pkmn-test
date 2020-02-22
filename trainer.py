@@ -11,8 +11,9 @@ class Trainer:
         self._name = name
         self._gender = gender
         self._has_pokedex = False
-        self._secret_id = randint(1, 99999)
-        self._trainer_id = randint(1, 99999) + self._secret_id * 65536
+        self._secret_id = randint(0, 99999)
+        self._trainer_id = randint(0, 65535)
+        self._final_id = self._trainer_id + self._secret_id * 65536
         # Bag and pockets {item: quantity}
         self._bag = {'Items': {},
                      'Medicine': {items.potion:1},
@@ -65,7 +66,7 @@ class Trainer:
         logging.info("Name:          " + str(self._name))
         logging.info("Gender:        " + str(self._gender))
         logging.info("Has Pokedex:   " + str(self._has_pokedex))
-        logging.info("Trainer ID:    " + str(self._trainer_id))
+        logging.info("Trainer ID:    " + str(self._final_id))
         logging.info("Bag:           " + str(self._bag))
         logging.info("Party Pokemon: " + str(self._pokemon))
         logging.info("\n")

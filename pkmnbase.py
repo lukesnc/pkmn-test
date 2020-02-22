@@ -45,7 +45,7 @@ class Pokemon(object):
                                      self._level, self._nature)
 
         # Trainer info
-        self._date_met = str(datetime.now())
+        self._date_met = datetime.now().strftime("%d-%m-%Y %H:%M")
         self._location_met = 'Route 1'
         self._characteristic = set_characteristic(self._ivs)
 
