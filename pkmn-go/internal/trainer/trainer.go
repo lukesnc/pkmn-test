@@ -14,7 +14,7 @@ type trainer struct {
   final_id int
 }
 
-func NewTrainer(n string, g string) *trainer {
+func NewTrainer(n, g string) *trainer {
   rand.Seed(time.Now().UnixNano())
   var s_id int = rand.Intn(99999 - 0 + 1) + 0
   var t_id int = rand.Intn(65535 - 0 + 1) + 0
