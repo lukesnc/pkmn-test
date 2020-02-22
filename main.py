@@ -10,7 +10,7 @@ import logging
 
 from pokemon import Bulbasaur
 from trainer import Trainer
-import items
+from items import *
 import moves
 import stats
 

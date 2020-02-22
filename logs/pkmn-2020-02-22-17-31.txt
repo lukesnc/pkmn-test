@@ -1,0 +1,35 @@
+INFO:root:TRAINER
+INFO:root:Name:          Luke
+INFO:root:Gender:        M
+INFO:root:Has Pokedex:   False
+INFO:root:Trainer ID:    247256066
+INFO:root:Bag:           {'Items': {}, 'Medicine': {<items.Medicine object at 0x00000188B031E9C8>: 1}, 'Balls': {<items.Ball object at 0x00000188B031EA88>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
+INFO:root:Party Pokemon: []
+INFO:root:
+
+INFO:root:POKEMON - BULBASAUR
+INFO:root:Name:           Bulbasaur
+INFO:root:Nickname:       None
+INFO:root:Pokedex #:      1
+INFO:root:Class:          Seed Pokemon
+INFO:root:Height:         0.7m
+INFO:root:Weight:         6.9kg
+INFO:root:Type(s):        Grass/Poison
+INFO:root:Gender:         M
+INFO:root:Nature:         Rash
+INFO:root:Ability:        Chlorophyll
+INFO:root:Ball:           Great Ball
+INFO:root:Max HP:         11 iv: 1
+INFO:root:Attack:         6 iv: 28
+INFO:root:Defense:        6 iv: 16
+INFO:root:Sp. Attack:     6 iv: 27
+INFO:root:Sp. Defense:    5 iv: 0
+INFO:root:Speed:          6 iv: 15
+INFO:root:Level:          5
+INFO:root:Exp. Points:    1 To next: 7
+INFO:root:Moves:          ['Tackle', 'Growl']
+INFO:root:Date met:       22-02-2020 17:31
+INFO:root:Location met:   Route 1
+INFO:root:Characteristic: Likes to fight
+INFO:root:
+

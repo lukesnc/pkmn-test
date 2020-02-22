@@ -8,19 +8,19 @@ from pkmnbase import Pokemon
 
 class Bulbasaur(Pokemon):
     # Attributes / stats
-    name = 'Bulbasaur'
-    classification = 'Seed Pokemon'
-    pokedex_num = 1
-    type = 'Grass/Poison'
-    chance_is_male = .8814
-    capture_rate = 45
-    height = 0.7
-    weight = 6.9
-    base_egg_steps = 5120
-    ev_earned = {'spAtk':1}
-    base_stats = {'hp':45,'atk':49,'def':49,'spAtk':65,'spDef':65,'spd':45}
-    evolution = 0
-    abilities = ['Overgrow', 'Chlorophyll']
+    _name = 'Bulbasaur'
+    _classification = 'Seed Pokemon'
+    _pokedex_num = 1
+    _type = 'Grass/Poison'
+    _chance_is_male = .8814
+    _capture_rate = 45
+    _height = 0.7
+    _weight = 6.9
+    _base_egg_steps = 5120
+    _ev_earned = {'spAtk':1}
+    _base_stats = {'hp':45,'atk':49,'def':49,'spAtk':65,'spDef':65,'spd':45}
+    _evolution = 0
+    _abilities = ['Overgrow', 'Chlorophyll']
 
     def __init__(self):
         Pokemon.__init__(self)

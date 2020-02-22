@@ -4,20 +4,21 @@
 # Imports
 from random import randint
 import logging
-import items
+
+from items import *
 
 class Trainer:
     def __init__(self, name, gender):
         self._name = name
         self._gender = gender
         self._has_pokedex = False
-        self._secret_id = randint(0, 99999)
+        self.__secret_id = randint(0, 99999)
         self._trainer_id = randint(0, 65535)
-        self._final_id = self._trainer_id + self._secret_id * 65536
+        self._final_id = self._trainer_id + self.__secret_id * 65536
         # Bag and pockets {item: quantity}
         self._bag = {'Items': {},
-                     'Medicine': {items.potion:1},
-                     'Balls': {items.poke_ball:5},
+                     'Medicine': {potion:1},
+                     'Balls': {poke_ball:5},
                      'Battle Items': {},
                      'Key Items': ['Town Map']}
         self._pokemon = []
@@ -51,7 +52,8 @@ class Trainer:
         return n
 
     def _throw_ball(ball):
-        pass
+        if self._bag['Balls'][ball] > 0:
+            pass
 
     def throw_ball(ball):
         try:
