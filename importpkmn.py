@@ -6,7 +6,7 @@ from configparser import ConfigParser
 
 pokemon_to_import = 'Bulbasaur'
 
-PKMNFILE = './pokemon-cfg/' + pokemon_to_import + '.cfg'
+PKMNFILE = './pkmn-cfg/' + pokemon_to_import + '.cfg'
 
 importer = ConfigParser()
 try:

@@ -7,6 +7,8 @@ be caught
 hold an item
 
 what can a trainer do?
+
+throw a poke ball
 catch pokemon
 use the pc
 run

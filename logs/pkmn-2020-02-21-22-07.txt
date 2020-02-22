@@ -2,8 +2,8 @@ INFO:root:TRAINER
 INFO:root:Name:          Luke
 INFO:root:Gender:        M
 INFO:root:Has Pokedex:   False
-INFO:root:Trainer ID:    1204594503
-INFO:root:Bag:           {'Items': {}, 'Medicine': {<items.Medicine object at 0x7f671818ad30>: 1}, 'Balls': {<items.Ball object at 0x7f671818add8>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
+INFO:root:Trainer ID:    5469264415
+INFO:root:Bag:           {'Items': {}, 'Medicine': {<items.Medicine object at 0x7f30a1a64e10>: 1}, 'Balls': {<items.Ball object at 0x7f30a1a64eb8>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
 INFO:root:Party Pokemon: []
 INFO:root:
 
@@ -16,20 +16,20 @@ INFO:root:Height:         0.7m
 INFO:root:Weight:         6.9kg
 INFO:root:Type(s):        Grass/Poison
 INFO:root:Gender:         M
-INFO:root:Nature:         Bold
+INFO:root:Nature:         Lonely
 INFO:root:Ability:        Overgrow
 INFO:root:Ball:           Great Ball
-INFO:root:Max HP:         12 iv: 27
-INFO:root:Attack:         5 iv: 10
-INFO:root:Defense:        6 iv: 11
-INFO:root:Sp. Attack:     6 iv: 28
-INFO:root:Sp. Defense:    6 iv: 8
-INFO:root:Speed:          5 iv: 4
-INFO:root:Level:          4
+INFO:root:Max HP:         12 iv: 10
+INFO:root:Attack:         6 iv: 14
+INFO:root:Defense:        5 iv: 14
+INFO:root:Sp. Attack:     6 iv: 5
+INFO:root:Sp. Defense:    6 iv: 15
+INFO:root:Speed:          6 iv: 12
+INFO:root:Level:          6
 INFO:root:Exp. Points:    1 To next: 7
 INFO:root:Moves:          ['Tackle', 'Growl']
-INFO:root:Date met:       2020-02-21 02:20:55.869830
+INFO:root:Date met:       2020-02-21 22:07:17.625231
 INFO:root:Location met:   Route 1
-INFO:root:Characteristic: Often lost in thought
+INFO:root:Characteristic: Strong willed
 INFO:root:
 

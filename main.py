@@ -15,7 +15,7 @@ import moves
 import stats
 
 # Global vars
-LOG_PATH = './logs/pkmn-' + str(datetime.now()) + '.txt'
+LOG_PATH = './logs/pkmn-' + datetime.now().strftime("%Y-%m-%d-%H-%M") + '.txt'
 logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
 
 class Game():
@@ -24,6 +24,7 @@ class Game():
         input()
         print("Why don't you tell me a little bit about yourself.")
         input()
+        # t = Trainer(Trainer.get_name(), Trainer.get_gender())
         me = Trainer('Luke', 'M')
         me.log_info()
 

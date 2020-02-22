@@ -13,7 +13,7 @@ class Trainer:
         self._has_pokedex = False
         self._secret_id = randint(1, 99999)
         self._trainer_id = randint(1, 99999) + self._secret_id * 65536
-        # Bag and pockets
+        # Bag and pockets {item: quantity}
         self._bag = {'Items': {},
                      'Medicine': {items.potion:1},
                      'Balls': {items.poke_ball:5},
@@ -48,6 +48,17 @@ class Trainer:
             print("Try again.\n")
             Trainer.get_name()
         return n
+
+    def _throw_ball(ball):
+        pass
+
+    def throw_ball(ball):
+        try:
+            _throw_ball(ball)
+            return True # can move to next turn
+        except:
+            print("None left!")
+            return False # stay in current turn
 
     def log_info(self):
         logging.info("TRAINER")
