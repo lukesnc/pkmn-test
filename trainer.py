@@ -51,11 +51,13 @@ class Trainer:
             Trainer.get_name()
         return n
 
-    def _throw_ball(ball):
+    def _throw_ball(self, ball):
         if self._bag['Balls'][ball] > 0:
-            pass
+            self._bag['Balls'][ball] -= 1
+        else:
+            raise Exception
 
-    def throw_ball(ball):
+    def throw_ball(self, ball):
         try:
             _throw_ball(ball)
             return True # can move to next turn

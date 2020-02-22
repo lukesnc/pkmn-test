@@ -8,11 +8,12 @@ class Item(object):
     def __init__(self, name, desc, cost):
         self._name = name
         self._description = desc
-        self._cost = cost
-        self._sell_price = cost * 0.5
+        self._cost = int(cost)
+        self._sell_price = int(cost * 0.5)
 
-    def use_item(self):
-        self._quantity -= 1
+    def use(self):
+        # Successfully used
+        return True
 
 class Medicine(Item):
     def __init__(self, name, desc, cost, type, hp_rest=0, stat_cured=None):
@@ -25,6 +26,27 @@ class Ball(Item):
     def __init__(self, name, desc, cost, rate):
         Item.__init__(self, name, desc, cost)
         self._catch_rate_mod = rate
+
+# Test item values
+def _test(_i):
+    print("Item:", _i._name)
+    print("Description:", _i._description)
+    print("Cost:", _i._cost)
+    print("Sell price:", _i._sell_price)
+    print("Used item.", _i.use())
+    # Medicine specific
+    try:
+        print("Type:", _i._type)
+        print("HP Restored:", _i._hp_restored)
+        print("Status cured:", _i._status_cured)
+    except:
+        pass
+    # Ball specific
+    try:
+        print("Catch rate:", _i._catch_rate_mod)
+    except:
+        pass
+    del _i
 
 
 # Potion
@@ -50,3 +72,6 @@ great_ball = Ball('Great Ball', _desc, 600, 1.5)
 # Ultra ball
 _desc = "An ultra-high-performance Poké Ball that provides a higher success rate for catching Pokémon than a Great Ball."
 ultra_ball = Ball('Ultra Ball', _desc, 800, 2.0)
+
+if __name__ == '__main__':
+    _test(great_ball)
