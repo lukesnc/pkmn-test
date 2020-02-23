@@ -21,7 +21,7 @@ class Trainer:
                      'Balls': {poke_ball:5},
                      'Battle Items': {},
                      'Key Items': ['Town Map']}
-        self._pokemon = []
+        self._party = []
 
     @staticmethod
     def get_gender():
@@ -72,7 +72,7 @@ class Trainer:
         logging.info("Has Pokedex:   " + str(self._has_pokedex))
         logging.info("Trainer ID:    " + str(self._final_id))
         logging.info("Bag:           " + str(self._bag))
-        logging.info("Party Pokemon: " + str(self._pokemon))
+        logging.info("Party Pokemon: " + str(self._party))
         logging.info("\n")
 
     def receive_pokedex(self):
