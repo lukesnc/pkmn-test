@@ -4,6 +4,7 @@
 # Imports
 import random
 
+import type
 from pkmnbase import Pokemon
 
 class Bulbasaur(Pokemon):
