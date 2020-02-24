@@ -30,7 +30,8 @@ class Game():
 
         # Test with Bulbasaur
         boy = Bulbasaur()
-        boy.catch('Great Ball') # CHANGE TO GREAT BALL ITEM
+        if me.throw_ball(ultra_ball, boy):
+            boy.catch(ultra_ball)
         boy.log_stats()
 
 if __name__ == '__main__':

@@ -66,7 +66,7 @@ class Pokemon(object):
     def _caught(self, ball):
         print("Successfully caught", self._name + '!')
         # Take catch args
-        self._ball = ball
+        self._ball = ball._name
         choice = input("Give " + self._name + " a nickname? [yes/no] ").lower().strip()
         if choice == 'yes':
             nickname = input("Enter nickname: ").strip()
