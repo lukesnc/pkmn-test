@@ -1,0 +1,15 @@
+ELEMENTS OF A BATTLE
+
+2 KINDS:
+- wild
+- trainer
+
+BOTH INCLUDE:
+- bag
+    - healing, reviving, status healing, battle items, throwing balls [BLOCKED BY TRAINER]
+- switch
+- attack
+
+ONLY WILD INCLUDES:
+- run
+- catching pokemon

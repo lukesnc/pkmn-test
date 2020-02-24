@@ -19,8 +19,8 @@ enemy_pkmn:  The enemy's first party Pokemon, whoever is switched in,
 
 class Battle:
     def __init__(self, player, enemy, type):
-        self.player_pkmn = None
-        self.enemy_pkmn = None
+        self.player_pkmn = player._party
+        self.enemy_pkmn = enemy._party
 
         if self.type == 'wild':
             pass
