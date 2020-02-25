@@ -9,7 +9,7 @@ class Type:
         self._attack_type = attack_type # Dict
         self._defend_type = defend_type # Dict
 
-def _test(type):
+def _test(_t):
     pass
 
 # Types

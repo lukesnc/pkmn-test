@@ -25,7 +25,7 @@ class Pokemon(object):
     _height = 0 #m
     _weight = 0 #kg
     _base_egg_steps = 0
-    _base_stats = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
+    _base_stats = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
     _evolution = 0
     _abilities = []
     capture_rate = 0
@@ -37,7 +37,7 @@ class Pokemon(object):
         self.ability = random.choice(self._abilities)
         self._ivs = generate_ivs()
         self.gender = set_gender(self._chance_is_male)
-        self._evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
+        self._evs = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
         self.level = 1
         self._exp = None
         self._exp_to_next_lvl = None
@@ -69,15 +69,12 @@ class Pokemon(object):
         self._exp_to_next_lvl = pow(self.level + 1, 3) - self._exp
 
     def catch(self, ball):
-        try:
-            self._caught(ball)
-        except:
-            pass
+        self._caught(ball)
 
     def _caught(self, ball):
         print("Successfully caught", self._name + '!')
         # Take catch args
-        self._ball = ball._name
+        self._ball = ball.name
         choice = input("Give " + self._name + " a nickname? [yes/no] ").lower().strip()
         if choice == 'yes':
             nickname = input("Enter nickname: ").strip()
@@ -85,6 +82,7 @@ class Pokemon(object):
                 print("Try again.\n")
                 self.catch(ball)
             self._nickname = nickname
+            # Hands off to trainer
 
     def gain_exp(self, points):
         print(self._name, "gained", points, "Exp. Points!")
@@ -110,8 +108,8 @@ class Pokemon(object):
         old_hp = self._stats['hp']
         old_atk = self._stats['atk']
         old_def = self._stats['def']
-        old_spAtk = self._stats['spAtk']
-        old_spDef = self._stats['spDef']
+        old_sp_atk = self._stats['spAtk']
+        old_sp_def = self._stats['spDef']
         old_spd = self._stats['spd']
         self._stats = generate_stats(self._base_stats, self._ivs, self._evs,
                                      self.level, self._nature)
@@ -120,8 +118,8 @@ class Pokemon(object):
         print("Max HP    +" + str(self._stats['hp'] - old_hp))
         print("Attack    +" + str(self._stats['atk'] - old_atk))
         print("Defense   +" + str(self._stats['def'] - old_def))
-        print("Sp. Atk   +" + str(self._stats['spAtk'] - old_spAtk))
-        print("Sp. Def   +" + str(self._stats['spDef'] - old_spDef))
+        print("Sp. Atk   +" + str(self._stats['spAtk'] - old_sp_atk))
+        print("Sp. Def   +" + str(self._stats['spDef'] - old_sp_def))
         print("Speed     +" + str(self._stats['spd'] - old_spd))
         input()
         print("Max HP    " + str(self._stats['hp']))
@@ -132,30 +130,30 @@ class Pokemon(object):
         print("Speed     " + str(self._stats['spd']))
 
     def log_stats(self):
-        logging.info("POKEMON - " + str(self._name.upper()))
-        logging.info("Name:           " + str(self._name))
-        logging.info("Nickname:       " + str(self._nickname))
-        logging.info("Pokedex #:      " + str(self._pokedex_num))
-        logging.info("Class:          " + str(self._classification))
-        logging.info("Height:         " + str(self._height) + 'm')
-        logging.info("Weight:         " + str(self._weight) + 'kg')
-        logging.info("Type(s):        " + str(self._type))
-        logging.info("Gender:         " + str(self.gender))
-        logging.info("Nature:         " + str(self._nature))
-        logging.info("Ability:        " + str(self.ability))
-        logging.info("Ball:           " + str(self._ball))
-        logging.info("Max HP:         " + str(self._stats['hp']) + " iv: " + str(self._ivs['hp']))
-        logging.info("Attack:         " + str(self._stats['atk']) + " iv: " + str(self._ivs['atk']))
-        logging.info("Defense:        " + str(self._stats['def']) + " iv: " + str(self._ivs['def']))
-        logging.info("Sp. Attack:     " + str(self._stats['spAtk']) + " iv: " + str(self._ivs['spAtk']))
-        logging.info("Sp. Defense:    " + str(self._stats['spDef']) + " iv: " + str(self._ivs['spDef']))
-        logging.info("Speed:          " + str(self._stats['spd']) + " iv: " + str(self._ivs['spd']))
-        logging.info("Level:          " + str(self.level))
-        logging.info("Exp. Points:    " + str(self._exp) + " To next: " + str(self._exp_to_next_lvl))
-        logging.info("Moves:          " + str(self.moves))
-        logging.info("Date met:       " + str(self._date_met))
-        logging.info("Location met:   " + str(self._location_met))
-        logging.info("Characteristic: " + str(self._characteristic))
+        logging.info("POKEMON - %s", self._name.upper())
+        logging.info("Name:           %s", self._name)
+        logging.info("Nickname:       %s", self._nickname)
+        logging.info("Pokedex #:      %s", self._pokedex_num)
+        logging.info("Class:          %s", self._classification)
+        logging.info("Height:         %s m", self._height)
+        logging.info("Weight:         %s kg", self._weight)
+        logging.info("Type(s):        %s", self._type)
+        logging.info("Gender:         %s", self.gender)
+        logging.info("Nature:         %s", self._nature)
+        logging.info("Ability:        %s", self.ability)
+        logging.info("Ball:           %s", self._ball)
+        logging.info("Max HP:         %s iv: %s", self._stats['hp'], self._ivs['hp'])
+        logging.info("Attack:         %s iv: %s", self._stats['atk'], self._ivs['atk'])
+        logging.info("Defense:        %s iv: %s", self._stats['def'], self._ivs['def'])
+        logging.info("Sp. Attack:     %s iv: %s", self._stats['spAtk'], self._ivs['spAtk'])
+        logging.info("Sp. Defense:    %s iv: %s", self._stats['spDef'], self._ivs['spDef'])
+        logging.info("Speed:          %s iv: %s", self._stats['spd'], self._ivs['spd'])
+        logging.info("Level:          %s", self.level)
+        logging.info("Exp. Points:    %s To next: %s", self._exp, self._exp_to_next_lvl)
+        logging.info("Moves:          %s", self.moves)
+        logging.info("Date met:       %s", self._date_met)
+        logging.info("Location met:   %s", self._location_met)
+        logging.info("Characteristic: %s", self._characteristic)
         logging.info("\n")
 
     def fight(self):

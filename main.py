@@ -32,6 +32,8 @@ class Game():
         boy = Bulbasaur()
         if me.throw_ball(ultra_ball, boy):
             boy.catch(ultra_ball)
+        else:
+            print("Argh! Almost had it.")
         boy.log_stats()
 
 if __name__ == '__main__':

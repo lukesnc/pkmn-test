@@ -4,39 +4,40 @@
 # Imports
 import random
 
-__all__ = ['generate_nature','generate_ivs','generate_stats',
-           'set_gender','set_characteristic']
+__all__ = ['generate_nature', 'generate_ivs', 'generate_stats',
+           'set_gender', 'set_characteristic']
 
 # Constants
-NATURES = ['Hardy','Lonely','Brave','Adamant','Naughty',
-           'Bold','Docile','Relaxed','Impish','Lax','Timid',
-           'Hasty','Serious','Jolly','Naive','Modest','Mild',
-           'Quiet','Bashful','Rash','Calm','Gentle','Sassy',
-           'Careful','Quirky']
+NATURES = ['Hardy', 'Lonely', 'Brave', 'Adamant', 'Naughty',
+           'Bold', 'Docile', 'Relaxed', 'Impish', 'Lax', 'Timid',
+           'Hasty', 'Serious', 'Jolly', 'Naive', 'Modest', 'Mild',
+           'Quiet', 'Bashful', 'Rash', 'Calm', 'Gentle', 'Sassy',
+           'Careful', 'Quirky']
 NATURE_MOD_INCREASE = 1.10
 NATURE_MOD_DECREASE = 0.90
 NATURE_MOD_NONE = 1.0
 
-CHARACTERISTICS = {'hp': ['Loves to eat','Often dozes off',
-                          'Often scatters things','Scatters things often',
+CHARACTERISTICS = {'hp': ['Loves to eat', 'Often dozes off',
+                          'Often scatters things', 'Scatters things often',
                           'Likes to Relax'],
-                   'atk': ['Proud of its power','Likes to thrash about',
-                           'A little quick tempered','Likes to fight',
+                   'atk': ['Proud of its power', 'Likes to thrash about',
+                           'A little quick tempered', 'Likes to fight',
                            'Quick Tempered'],
-                   'def': ['Sturdy body','Capable of taking hits',
-                           'Highly persistent','Good endurance',
+                   'def': ['Sturdy body', 'Capable of taking hits',
+                           'Highly persistent', 'Good endurance',
                            'Good perseverance'],
-                   'spAtk': ['Highly curious','Mischievous',
-                             'Thoroughly Cunning','Often lost in thought',
+                   'spAtk': ['Highly curious', 'Mischievous',
+                             'Thoroughly Cunning', 'Often lost in thought',
                              'Very finicky'],
-                   'spDef': ['Strong willed','Somewhat vain',
-                             'Strongly defiant','Hates to lose',
+                   'spDef': ['Strong willed', 'Somewhat vain',
+                             'Strongly defiant', 'Hates to lose',
                              'Somewhat stubborn'],
-                   'spd': ['Likes to run','Alert to sounds',
-                           'Impetuous and silly','Somewhat of a clown',
+                   'spd': ['Likes to run', 'Alert to sounds',
+                           'Impetuous and silly', 'Somewhat of a clown',
                            'Quick to flee']}
 
 class Stats:
+    """Collection of functions for calculating stats"""
     def __init__(self):
         pass
 
@@ -46,20 +47,22 @@ class Stats:
 
     # Generates an individual value (IV)
     def generate_ivs(self):
-        temp = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
-        for k,v in temp.items():
+        temp = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
+        for k in temp:
             temp[k] = random.randint(0, 32)
         return temp # Dictionary
 
     # Sets stats based on IVs, EVs, and base stats
     # Formulas found at bulbapedia.bulbagarden.net/wiki/Individual_values
     def generate_stats(self, base_stats, ivs, evs, level, nature):
-        temp = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
-        for k,v in temp.items(): # s being stat
+        temp = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
+        for k in temp: # s being stat
             if k == 'hp':
-                temp[k] = int(((2 * base_stats[k] + ivs[k] + int(evs[k]/4)) * level) / 100) + level + 10
+                temp[k] = int(((2 * base_stats[k] + ivs[k] +
+                                int(evs[k]/4)) * level) / 100) + level + 10
             else:
-                temp[k] = int((int(((2 * base_stats[k] + ivs[k] + int(evs[k]/4)) * level) / 100) + 5) * self._set_nature_mod(k, nature))
+                temp[k] = int((int(((2 * base_stats[k] + ivs[k] + int(evs[k]/4)) * level) /
+                                   100) + 5) * self._set_nature_mod(k, nature))
         return temp # Dictionary
 
     # Generates the Pokemons gender, default is 50/50
@@ -69,7 +72,7 @@ class Stats:
                 return 'M'
             else:
                 return 'F'
-        except:
+        except TypeError:
             return None
 
     # Gets a particular stats modifier based on the nature (10% inc or dec)
@@ -85,7 +88,7 @@ class Stats:
         elif stat == 'def':
             if nature in NATURES[5:10] and nature != 'Docile':
                 return NATURE_MOD_INCREASE
-            elif nature in ['Lonely','Hasty','Mild','Gentle']:
+            elif nature in ['Lonely', 'Hasty', 'Mild', 'Gentle']:
                 return NATURE_MOD_DECREASE
             else:
                 return NATURE_MOD_NONE
@@ -93,7 +96,7 @@ class Stats:
         elif stat == 'spd':
             if nature in NATURES[10:15] and nature != 'Serious':
                 return NATURE_MOD_INCREASE
-            elif nature in ['Brave','Relaxed','Quiet','Sassy']:
+            elif nature in ['Brave', 'Relaxed', 'Quiet', 'Sassy']:
                 return NATURE_MOD_DECREASE
             else:
                 return NATURE_MOD_NONE
@@ -101,7 +104,7 @@ class Stats:
         elif stat == 'spAtk':
             if nature in NATURES[15:20] and nature != 'Bashful':
                 return NATURE_MOD_INCREASE
-            elif nature in ['Adamant','Impish','Jolly','Careful']:
+            elif nature in ['Adamant', 'Impish', 'Jolly', 'Careful']:
                 return NATURE_MOD_DECREASE
             else:
                 return NATURE_MOD_NONE
@@ -117,29 +120,29 @@ class Stats:
     # Gets a Pokemons characteristic based on their iv values
     def set_characteristic(self, ivs):
         highest_iv = 'hp'
-        for k,v in ivs.items():
+        for k, v in ivs.items():
             if ivs[highest_iv] < v:
                 highest_iv = k
 
-        for k,v in ivs.items():
+        for k, v in ivs.items():
             if k == highest_iv:
                 if v in range(0, 31, 5):
                     return CHARACTERISTICS[k][0]
-                elif v in range(1, 32, 5):
+                if v in range(1, 32, 5):
                     return CHARACTERISTICS[k][1]
-                elif v in range(2, 28, 5):
+                if v in range(2, 28, 5):
                     return CHARACTERISTICS[k][2]
-                elif v in range(3, 29, 5):
+                if v in range(3, 29, 5):
                     return CHARACTERISTICS[k][3]
-                elif v in range(4, 30, 5):
+                if v in range(4, 30, 5):
                     return CHARACTERISTICS[k][4]
 
 
 # Test functionality
 def _test():
     # Charizard
-    _bs = {'hp':78,'atk':84,'def':78,'spAtk':109,'spDef':85,'spd':100}
-    _evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
+    _bs = {'hp':78, 'atk':84, 'def':78, 'spAtk':109, 'spDef':85, 'spd':100}
+    _evs = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
     _n = generate_nature()
     _ivs = generate_ivs()
     _s = generate_stats(_bs, _ivs, _evs, 50, _n)

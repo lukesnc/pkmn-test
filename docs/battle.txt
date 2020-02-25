@@ -13,3 +13,9 @@ BOTH INCLUDE:
 ONLY WILD INCLUDES:
 - run
 - catching pokemon
+
+
+What can happen inside a battle?
+-someone wins/loses
+-a pokemon is caught
+-normal battle things [bag, switch, attack]

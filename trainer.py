@@ -8,6 +8,7 @@ import logging
 from items import *
 
 class Trainer:
+    """This is what the player plays as; a Pokemon Trainer"""
     def __init__(self, name, gender):
         self.name = name
         self.gender = gender
@@ -22,6 +23,34 @@ class Trainer:
                     'Battle Items': {},
                     'Key Items': ['Town Map']}
         self.party = []
+
+    def _throw_ball(self, ball, pkmn):
+        if self.bag['Balls'][ball] > 0:
+            self.bag['Balls'][ball] -= 1
+            # catch calculations
+
+    def throw_ball(self, ball, pkmn):
+        if self._throw_ball(ball, pkmn):
+            return True
+        else:
+            return False
+
+    def add_to_party(self, pkmn):
+        self.party.append(pkmn)
+        print(pkmn.get_name(), "has been added to your party.")
+
+    def receive_pokedex(self):
+        self._has_pokedex = True
+
+    def log_info(self):
+        logging.info("TRAINER")
+        logging.info("Name:          %s", self.name)
+        logging.info("Gender:        %s", self.gender)
+        logging.info("Has Pokedex:   %s", self._has_pokedex)
+        logging.info("Trainer ID:    %s", self.final_id)
+        logging.info("Bag:           %s", self.bag)
+        logging.info("Party Pokemon: %s", self.party)
+        logging.info("\n")
 
     @staticmethod
     def get_gender():
@@ -50,30 +79,3 @@ class Trainer:
             print("Try again.\n")
             Trainer.get_name()
         return n
-
-    def _throw_ball(self, ball, pkmn):
-        if self.bag['Balls'][ball] > 0:
-            self.bag['Balls'][ball] -= 1
-
-        else:
-            raise Exception
-
-    def throw_ball(self, ball, pkmn):
-        try:
-            return _throw_ball(ball, pkmn)
-        except:
-            print("None left!")
-            return False # stay in current turn
-
-    def log_info(self):
-        logging.info("TRAINER")
-        logging.info("Name:          " + str(self.name))
-        logging.info("Gender:        " + str(self.gender))
-        logging.info("Has Pokedex:   " + str(self._has_pokedex))
-        logging.info("Trainer ID:    " + str(self.final_id))
-        logging.info("Bag:           " + str(self.bag))
-        logging.info("Party Pokemon: " + str(self.party))
-        logging.info("\n")
-
-    def receive_pokedex(self):
-        self.has_pokedex = True

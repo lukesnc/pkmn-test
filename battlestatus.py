@@ -5,7 +5,8 @@ class StatUp:
     pass
 
 class StatDown:
-    pass
+    def __init__(self, target, stat):
+        pass
 
 class Poison:
     pass
