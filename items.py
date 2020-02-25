@@ -6,10 +6,10 @@ __all__ = ['potion','super_potion','antidote','poke_ball','great_ball',
 
 class Item(object):
     def __init__(self, name, desc, cost):
-        self._name = name
-        self._description = desc
-        self._cost = int(cost)
-        self._sell_price = int(cost * 0.5)
+        self.name = name
+        self.description = desc
+        self.cost = int(cost)
+        self.sell_price = int(cost * 0.5)
 
     def use(self):
         # Successfully used
@@ -18,9 +18,9 @@ class Item(object):
 class Medicine(Item):
     def __init__(self, name, desc, cost, type, hp_rest=0, stat_cured=None):
         Item.__init__(self, name, desc, cost)
-        self._type = type # HP or Status
-        self._hp_restored = hp_rest
-        self._status_cured = stat_cured
+        self.type = type # HP or Status
+        self.hp_restored = hp_rest
+        self.status_cured = stat_cured
 
 class Ball(Item):
     def __init__(self, name, desc, cost, rate):
@@ -29,16 +29,16 @@ class Ball(Item):
 
 # Test item values
 def _test(_i):
-    print("Item:", _i._name)
-    print("Description:", _i._description)
-    print("Cost:", _i._cost)
-    print("Sell price:", _i._sell_price)
+    print("Item:", _i.name)
+    print("Description:", _i.description)
+    print("Cost:", _i.cost)
+    print("Sell price:", _i.sell_price)
     print("Used item.", _i.use())
     # Medicine specific
     try:
-        print("Type:", _i._type)
-        print("HP Restored:", _i._hp_restored)
-        print("Status cured:", _i._status_cured)
+        print("Type:", _i.type)
+        print("HP Restored:", _i.hp_restored)
+        print("Status cured:", _i.status_cured)
     except:
         pass
     # Ball specific

@@ -16,11 +16,11 @@ class Pokemon(object):
     _pokedex_num = None
     _type = '???'
     _chance_is_male = 0.5
-    _capture_rate = 0
+    capture_rate = 0
     _height = 0 #m
     _weight = 0 #kg
     _base_egg_steps = 0
-    _ev_earned = {'stat':0}
+    ev_earned = {'stat':0}
     _base_stats = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
     _evolution = 0
     _abilities = []
@@ -28,21 +28,21 @@ class Pokemon(object):
     def __init__(self):
         # Set stats
         self._nature = generate_nature()
-        self._ability = random.choice(self._abilities)
+        self.ability = random.choice(self._abilities)
         self._ivs = generate_ivs()
-        self._gender = set_gender(self._chance_is_male)
+        self.gender = set_gender(self._chance_is_male)
         self._evs = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
-        self._level = 1
+        self.level = 1
         self._exp = None
         self._exp_to_next_lvl = None
         self._set_exp()
-        self._moves = []
+        self.moves = []
         self._nickname = None
         self._ball = 'Poke Ball'
 
         # Must come last
         self._stats = generate_stats(self._base_stats, self._ivs, self._evs,
-                                     self._level, self._nature)
+                                     self.level, self._nature)
 
         # Trainer info
         self._date_met = datetime.now().strftime("%d-%m-%Y %H:%M")
@@ -54,8 +54,8 @@ class Pokemon(object):
         self._held_item = None
 
     def _set_exp(self, extra_points=0):
-        self._exp = pow(self._level, 3) + extra_points
-        self._exp_to_next_lvl = pow(self._level + 1, 3) - self._exp
+        self._exp = pow(self.level, 3) + extra_points
+        self._exp_to_next_lvl = pow(self.level + 1, 3) - self._exp
 
     def catch(self, ball):
         try:
@@ -80,7 +80,7 @@ class Pokemon(object):
         self._exp += points
         input()
         if points > self._exp_to_next_lvl:
-            self._level_up()
+            self.level_up()
             extra = points - self._exp_to_next_lvl
             self._set_exp(extra)
         else:
@@ -89,12 +89,12 @@ class Pokemon(object):
     def set_status(self, status):
         self._status = status
 
-    def set_held_item(self):
-        return self._held_item
+    def set_held_item(self, item=None):
+        self._held_item = item
 
     def _level_up(self):
-        self._level += 1
-        print(self._name, "grew to Lv.", str(self._level) + "!")
+        self.level += 1
+        print(self._name, "grew to Lv.", str(self.level) + "!")
 
         old_hp = self._stats['hp']
         old_atk = self._stats['atk']
@@ -103,7 +103,7 @@ class Pokemon(object):
         old_spDef = self._stats['spDef']
         old_spd = self._stats['spd']
         self._stats = generate_stats(self._base_stats, self._ivs, self._evs,
-                                     self._level, self._nature)
+                                     self.level, self._nature)
 
         input()
         print("Max HP    +" + str(self._stats['hp'] - old_hp))
@@ -129,9 +129,9 @@ class Pokemon(object):
         logging.info("Height:         " + str(self._height) + 'm')
         logging.info("Weight:         " + str(self._weight) + 'kg')
         logging.info("Type(s):        " + str(self._type))
-        logging.info("Gender:         " + str(self._gender))
+        logging.info("Gender:         " + str(self.gender))
         logging.info("Nature:         " + str(self._nature))
-        logging.info("Ability:        " + str(self._ability))
+        logging.info("Ability:        " + str(self.ability))
         logging.info("Ball:           " + str(self._ball))
         logging.info("Max HP:         " + str(self._stats['hp']) + " iv: " + str(self._ivs['hp']))
         logging.info("Attack:         " + str(self._stats['atk']) + " iv: " + str(self._ivs['atk']))
@@ -139,9 +139,9 @@ class Pokemon(object):
         logging.info("Sp. Attack:     " + str(self._stats['spAtk']) + " iv: " + str(self._ivs['spAtk']))
         logging.info("Sp. Defense:    " + str(self._stats['spDef']) + " iv: " + str(self._ivs['spDef']))
         logging.info("Speed:          " + str(self._stats['spd']) + " iv: " + str(self._ivs['spd']))
-        logging.info("Level:          " + str(self._level))
+        logging.info("Level:          " + str(self.level))
         logging.info("Exp. Points:    " + str(self._exp) + " To next: " + str(self._exp_to_next_lvl))
-        logging.info("Moves:          " + str(self._moves))
+        logging.info("Moves:          " + str(self.moves))
         logging.info("Date met:       " + str(self._date_met))
         logging.info("Location met:   " + str(self._location_met))
         logging.info("Characteristic: " + str(self._characteristic))

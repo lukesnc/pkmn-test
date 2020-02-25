@@ -14,7 +14,8 @@ def _test(type):
 
 # Types
 _types = []
-for type in types:
+fire = Type('Fire', {}, {})
+for type in _types:
     pass
 
 

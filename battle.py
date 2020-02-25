@@ -40,12 +40,12 @@ class Battle:
 def _test():
     from trainer import Trainer
     from pokemon import Bulbasaur
-    p = Trainer('Test', 'F')
-    my_b = Bulbasaur()
-    p._party.append(my_b)
-    e = Bulbasaur()
-    b = Battle(p, e, 'wild')
-    del b, p, my_b, e
+    _p = Trainer('Test', 'F')
+    _my_b = Bulbasaur()
+    _p._party.append(_my_b)
+    _e = Bulbasaur()
+    _b = Battle(_p, _e, 'wild')
+    del _b, _p, _my_b, _e
 
 if __name__ == '__main__':
     _test()

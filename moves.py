@@ -3,27 +3,26 @@
 
 # Imports
 from random import random
-import logging
 
 from battlestatus import *
 
 # Attack moves class
 class Move(object):
     def __init__(self, num, name, type, cat, pp, pow, acc):
-        self._number = num
-        self._name = name
-        self._type = type # ex. Grass
-        self._category = cat # Special/Physical/Status
-        self._pp = pp
-        self._power = pow
-        self._accuracy = acc
+        self.number = num
+        self.name = name
+        self.type = type # ex. Grass
+        self.category = cat # Special/Physical/Status
+        self.pp = pp
+        self.power = pow
+        self.accuracy = acc
 
     def use(self):
-        if random() < self._accuracy and self._pp > 0:
-            self._pp -= 1
-            return [self._type, self._category, self._power]
+        if random() < self.accuracy and self.pp > 0:
+            self.pp -= 1
+            return [self.type, self.category, self.power]
         else:
-            if self._pp > 0:
+            if self.pp > 0:
                 print("There's no PP left for this move!")
             else:
                 print("The attack missed!")
@@ -33,17 +32,21 @@ _effects = ['Stat Up', 'Stat Down', 'Status', 'Restore HP']
 class StatusMove(Move):
     def __init__(self, num, name, type, pp, effect, acc):
         Move.__init__(self, num, name, type, 'Status', pp, None, acc)
-        self._effect = effect
+        self.effect = effect
 
 def _test(move):
-    logging.info("MOVE - " + str(move._name))
-    logging.info("Number:   " + str(move._number))
-    logging.info("Type:     " + str(move._type))
-    logging.info("Category: " + str(move._category))
-    logging.info("PP:       " + str(move._pp))
-    logging.info("Power:    " + str(move._power))
-    logging.info("Accuracy: " + str(move._accuracy))
-    logging.info("\n")
+    print("MOVE -", move.name)
+    print("Number:", move.number)
+    print("Type:", move.type)
+    print("Category:", move.category)
+    print("PP:", move.pp)
+    print("Power:", move.power)
+    print("Accuracy:", move.accuracy)
+    try:
+        print("Status effect:", move.effect)
+    except:
+        pass
+    print("\n")
 
 # Moves
 pound = Move(1, 'Pound', 'Normal', 'Physical', 35, 40, 1.0)
