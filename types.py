@@ -3,9 +3,9 @@
 
 # Imports
 
-class Type(object):
+class Type:
     def __init__(self, name, attack_type, defend_type):
-        self._name = name
+        self.name = name
         self._attack_type = attack_type # Dict
         self._defend_type = defend_type # Dict
 
@@ -15,7 +15,7 @@ def _test(type):
 # Types
 _types = []
 fire = Type('Fire', {}, {})
-for type in _types:
+for t in _types:
     pass
 
 

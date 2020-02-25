@@ -6,24 +6,30 @@ import random
 from datetime import datetime
 import logging
 
-from type import Type
+import types
 from stats import *
 
 class Pokemon(object):
+    """
+    The base Pokemon class
+    All Pokemon will derive from this as a subclass
+    Includes methods for things that a Pokemon can do
+    See notes.txt for more
+    """
     # Static class variables
     _name = ''
     _classification = ''
     _pokedex_num = None
     _type = '???'
     _chance_is_male = 0.5
-    capture_rate = 0
     _height = 0 #m
     _weight = 0 #kg
     _base_egg_steps = 0
-    ev_earned = {'stat':0}
     _base_stats = {'hp':0,'atk':0,'def':0,'spAtk':0,'spDef':0,'spd':0}
     _evolution = 0
     _abilities = []
+    capture_rate = 0
+    ev_earned = {'stat':0}
 
     def __init__(self):
         # Set stats
@@ -53,6 +59,11 @@ class Pokemon(object):
         self._status = None
         self._held_item = None
 
+    def get_name(self):
+        if self._nickname is not None:
+            return self._nickname
+        return self._name
+
     def _set_exp(self, extra_points=0):
         self._exp = pow(self.level, 3) + extra_points
         self._exp_to_next_lvl = pow(self.level + 1, 3) - self._exp
@@ -72,7 +83,7 @@ class Pokemon(object):
             nickname = input("Enter nickname: ").strip()
             if len(nickname) > 10:
                 print("Try again.\n")
-                self.catch()
+                self.catch(ball)
             self._nickname = nickname
 
     def gain_exp(self, points):
@@ -80,7 +91,7 @@ class Pokemon(object):
         self._exp += points
         input()
         if points > self._exp_to_next_lvl:
-            self.level_up()
+            self._level_up()
             extra = points - self._exp_to_next_lvl
             self._set_exp(extra)
         else:

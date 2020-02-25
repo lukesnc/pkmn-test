@@ -77,6 +77,3 @@ class Trainer:
 
     def receive_pokedex(self):
         self.has_pokedex = True
-
-    def throw_ball(self, ball):
-        pass
