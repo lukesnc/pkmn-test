@@ -10,7 +10,7 @@ import logging
 
 from pokemon import Bulbasaur
 from trainer import Trainer
-from items import *
+import items as itm
 import moves
 import stats
 
@@ -30,8 +30,8 @@ class Game():
 
         # Test with Bulbasaur
         boy = Bulbasaur()
-        if me.throw_ball(ultra_ball, boy):
-            boy.catch(ultra_ball)
+        if me.throw_ball(itm.ultra_ball, boy):
+            boy.catch(itm.ultra_ball)
         else:
             print("Argh! Almost had it.")
         boy.log_stats()

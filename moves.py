@@ -8,13 +8,13 @@ from battlestatus import *
 
 # Attack moves class
 class Move(object):
-    def __init__(self, num, name, type, cat, pp, pow, acc):
+    def __init__(self, num, name, mv_type, cat, pp, mv_pow, acc):
         self.number = num
         self.name = name
-        self.type = type # ex. Grass
+        self.type = mv_type # ex. Grass
         self.category = cat # Special/Physical/Status
         self.pp = pp
-        self.power = pow
+        self.power = mv_pow
         self.accuracy = acc
 
     def use(self):
@@ -30,8 +30,8 @@ class Move(object):
 # Status moves class
 _effects = ['Stat Up', 'Stat Down', 'Status', 'Restore HP']
 class StatusMove(Move):
-    def __init__(self, num, name, type, pp, effect, acc):
-        Move.__init__(self, num, name, type, 'Status', pp, None, acc)
+    def __init__(self, num, name, mv_type, pp, effect, acc):
+        Move.__init__(self, num, name, mv_type, 'Status', pp, None, acc)
         self.effect = effect
 
 def _test(move):
@@ -53,7 +53,7 @@ pound = Move(1, 'Pound', 'Normal', 'Physical', 35, 40, 1.0)
 tackle = Move(33, 'Tackle', 'Normal', 'Physical', 35, 40, 1.0)
 growl = StatusMove(45, 'Growl', 'Normal', 40, StatDown('enemy','atk'), 1.0)
 ember = Move(52, 'Ember', 'Fire', 'Special', 25, 40, 1.0)
-poison_powder = StatusMove(77, 'Poison Powder', 'Poison', 35, Poison(), 0.75)
+poison_powder = StatusMove(77, 'Poison Powder', 'Poison', 35, Poison(is_bad=False), 0.75)
 thunder = Move(87, 'Thunder', 'Electric', 'Special', 10, 110, 0.7)
 
 if __name__ == '__main__':

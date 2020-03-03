@@ -9,7 +9,16 @@ class StatDown:
         pass
 
 class Poison:
-    pass
+    def __init__(self, is_bad):
+        self.is_bad = is_bad
 
 class Paralyze:
     pass
+
+# Test functionality
+def _test(battle_stat):
+    pass
+
+if __name__ == '__main__':
+    _poison = Poison(is_bad=True)
+    _test(_poison)

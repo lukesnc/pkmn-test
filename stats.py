@@ -7,43 +7,44 @@ import random
 __all__ = ['generate_nature', 'generate_ivs', 'generate_stats',
            'set_gender', 'set_characteristic']
 
-# Constants
-NATURES = ['Hardy', 'Lonely', 'Brave', 'Adamant', 'Naughty',
-           'Bold', 'Docile', 'Relaxed', 'Impish', 'Lax', 'Timid',
-           'Hasty', 'Serious', 'Jolly', 'Naive', 'Modest', 'Mild',
-           'Quiet', 'Bashful', 'Rash', 'Calm', 'Gentle', 'Sassy',
-           'Careful', 'Quirky']
-NATURE_MOD_INCREASE = 1.10
-NATURE_MOD_DECREASE = 0.90
-NATURE_MOD_NONE = 1.0
-
-CHARACTERISTICS = {'hp': ['Loves to eat', 'Often dozes off',
-                          'Often scatters things', 'Scatters things often',
-                          'Likes to Relax'],
-                   'atk': ['Proud of its power', 'Likes to thrash about',
-                           'A little quick tempered', 'Likes to fight',
-                           'Quick Tempered'],
-                   'def': ['Sturdy body', 'Capable of taking hits',
-                           'Highly persistent', 'Good endurance',
-                           'Good perseverance'],
-                   'spAtk': ['Highly curious', 'Mischievous',
-                             'Thoroughly Cunning', 'Often lost in thought',
-                             'Very finicky'],
-                   'spDef': ['Strong willed', 'Somewhat vain',
-                             'Strongly defiant', 'Hates to lose',
-                             'Somewhat stubborn'],
-                   'spd': ['Likes to run', 'Alert to sounds',
-                           'Impetuous and silly', 'Somewhat of a clown',
-                           'Quick to flee']}
-
-class Stats:
+class _Stats:
     """Collection of functions for calculating stats"""
+
+    # Constants
+    NATURES = ['Hardy', 'Lonely', 'Brave', 'Adamant', 'Naughty',
+            'Bold', 'Docile', 'Relaxed', 'Impish', 'Lax', 'Timid',
+            'Hasty', 'Serious', 'Jolly', 'Naive', 'Modest', 'Mild',
+            'Quiet', 'Bashful', 'Rash', 'Calm', 'Gentle', 'Sassy',
+            'Careful', 'Quirky']
+    NATURE_MOD_INCREASE = 1.10
+    NATURE_MOD_DECREASE = 0.90
+    NATURE_MOD_NONE = 1.0
+
+    CHARACTERISTICS = {'hp': ['Loves to eat', 'Often dozes off',
+                            'Often scatters things', 'Scatters things often',
+                            'Likes to Relax'],
+                    'atk': ['Proud of its power', 'Likes to thrash about',
+                            'A little quick tempered', 'Likes to fight',
+                            'Quick Tempered'],
+                    'def': ['Sturdy body', 'Capable of taking hits',
+                            'Highly persistent', 'Good endurance',
+                            'Good perseverance'],
+                    'spAtk': ['Highly curious', 'Mischievous',
+                                'Thoroughly Cunning', 'Often lost in thought',
+                                'Very finicky'],
+                    'spDef': ['Strong willed', 'Somewhat vain',
+                                'Strongly defiant', 'Hates to lose',
+                                'Somewhat stubborn'],
+                    'spd': ['Likes to run', 'Alert to sounds',
+                            'Impetuous and silly', 'Somewhat of a clown',
+                            'Quick to flee']}
+
     def __init__(self):
         pass
 
     # Return a random nature for a pokemon to have
     def generate_nature(self):
-        return random.choice(NATURES)
+        return random.choice(self.NATURES)
 
     # Generates an individual value (IV)
     def generate_ivs(self):
@@ -78,44 +79,44 @@ class Stats:
     # Gets a particular stats modifier based on the nature (10% inc or dec)
     def _set_nature_mod(self, stat, nature):
         if stat == 'atk':
-            if nature in NATURES[1:5]:
-                return NATURE_MOD_INCREASE
-            elif nature in NATURES[5::5]:
-                return NATURE_MOD_DECREASE
+            if nature in self.NATURES[1:5]:
+                return self.NATURE_MOD_INCREASE
+            elif nature in self.NATURES[5::5]:
+                return self.NATURE_MOD_DECREASE
             else:
-                return NATURE_MOD_NONE
+                return self.NATURE_MOD_NONE
 
         elif stat == 'def':
-            if nature in NATURES[5:10] and nature != 'Docile':
-                return NATURE_MOD_INCREASE
+            if nature in self.NATURES[5:10] and nature != 'Docile':
+                return self.NATURE_MOD_INCREASE
             elif nature in ['Lonely', 'Hasty', 'Mild', 'Gentle']:
-                return NATURE_MOD_DECREASE
+                return self.NATURE_MOD_DECREASE
             else:
-                return NATURE_MOD_NONE
+                return self.NATURE_MOD_NONE
 
         elif stat == 'spd':
-            if nature in NATURES[10:15] and nature != 'Serious':
-                return NATURE_MOD_INCREASE
+            if nature in self.NATURES[10:15] and nature != 'Serious':
+                return self.NATURE_MOD_INCREASE
             elif nature in ['Brave', 'Relaxed', 'Quiet', 'Sassy']:
-                return NATURE_MOD_DECREASE
+                return self.NATURE_MOD_DECREASE
             else:
-                return NATURE_MOD_NONE
+                return self.NATURE_MOD_NONE
 
         elif stat == 'spAtk':
-            if nature in NATURES[15:20] and nature != 'Bashful':
-                return NATURE_MOD_INCREASE
+            if nature in self.NATURES[15:20] and nature != 'Bashful':
+                return self.NATURE_MOD_INCREASE
             elif nature in ['Adamant', 'Impish', 'Jolly', 'Careful']:
-                return NATURE_MOD_DECREASE
+                return self.NATURE_MOD_DECREASE
             else:
-                return NATURE_MOD_NONE
+                return self.NATURE_MOD_NONE
 
         elif stat == 'spDef':
-            if nature in NATURES[20:24]:
-                return NATURE_MOD_INCREASE
-            elif nature in NATURES[4::5] and nature != 'Quirky':
-                return NATURE_MOD_DECREASE
+            if nature in self.NATURES[20:24]:
+                return self.NATURE_MOD_INCREASE
+            elif nature in self.NATURES[4::5] and nature != 'Quirky':
+                return self.NATURE_MOD_DECREASE
             else:
-                return NATURE_MOD_NONE
+                return self.NATURE_MOD_NONE
 
     # Gets a Pokemons characteristic based on their iv values
     def set_characteristic(self, ivs):
@@ -127,15 +128,15 @@ class Stats:
         for k, v in ivs.items():
             if k == highest_iv:
                 if v in range(0, 31, 5):
-                    return CHARACTERISTICS[k][0]
+                    return self.CHARACTERISTICS[k][0]
                 if v in range(1, 32, 5):
-                    return CHARACTERISTICS[k][1]
+                    return self.CHARACTERISTICS[k][1]
                 if v in range(2, 28, 5):
-                    return CHARACTERISTICS[k][2]
+                    return self.CHARACTERISTICS[k][2]
                 if v in range(3, 29, 5):
-                    return CHARACTERISTICS[k][3]
+                    return self.CHARACTERISTICS[k][3]
                 if v in range(4, 30, 5):
-                    return CHARACTERISTICS[k][4]
+                    return self.CHARACTERISTICS[k][4]
 
 
 # Test functionality
@@ -161,7 +162,7 @@ def _test():
 
 
 # Public package
-_s = Stats()
+_s = _Stats()
 generate_nature = _s.generate_nature
 generate_ivs = _s.generate_ivs
 generate_stats = _s.generate_stats
