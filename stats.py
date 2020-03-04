@@ -7,37 +7,38 @@ import random
 __all__ = ['generate_nature', 'generate_ivs', 'generate_stats',
            'set_gender', 'set_characteristic']
 
+
 class _Stats:
     """Collection of functions for calculating stats"""
 
     # Constants
     NATURES = ['Hardy', 'Lonely', 'Brave', 'Adamant', 'Naughty',
-            'Bold', 'Docile', 'Relaxed', 'Impish', 'Lax', 'Timid',
-            'Hasty', 'Serious', 'Jolly', 'Naive', 'Modest', 'Mild',
-            'Quiet', 'Bashful', 'Rash', 'Calm', 'Gentle', 'Sassy',
-            'Careful', 'Quirky']
+               'Bold', 'Docile', 'Relaxed', 'Impish', 'Lax', 'Timid',
+               'Hasty', 'Serious', 'Jolly', 'Naive', 'Modest', 'Mild',
+               'Quiet', 'Bashful', 'Rash', 'Calm', 'Gentle', 'Sassy',
+               'Careful', 'Quirky']
     NATURE_MOD_INCREASE = 1.10
     NATURE_MOD_DECREASE = 0.90
     NATURE_MOD_NONE = 1.0
 
     CHARACTERISTICS = {'hp': ['Loves to eat', 'Often dozes off',
-                            'Often scatters things', 'Scatters things often',
-                            'Likes to Relax'],
-                    'atk': ['Proud of its power', 'Likes to thrash about',
-                            'A little quick tempered', 'Likes to fight',
-                            'Quick Tempered'],
-                    'def': ['Sturdy body', 'Capable of taking hits',
-                            'Highly persistent', 'Good endurance',
-                            'Good perseverance'],
-                    'spAtk': ['Highly curious', 'Mischievous',
-                                'Thoroughly Cunning', 'Often lost in thought',
-                                'Very finicky'],
-                    'spDef': ['Strong willed', 'Somewhat vain',
-                                'Strongly defiant', 'Hates to lose',
-                                'Somewhat stubborn'],
-                    'spd': ['Likes to run', 'Alert to sounds',
-                            'Impetuous and silly', 'Somewhat of a clown',
-                            'Quick to flee']}
+                              'Often scatters things', 'Scatters things often',
+                              'Likes to Relax'],
+                       'atk': ['Proud of its power', 'Likes to thrash about',
+                               'A little quick tempered', 'Likes to fight',
+                               'Quick Tempered'],
+                       'def': ['Sturdy body', 'Capable of taking hits',
+                               'Highly persistent', 'Good endurance',
+                               'Good perseverance'],
+                       'spAtk': ['Highly curious', 'Mischievous',
+                                 'Thoroughly Cunning', 'Often lost in thought',
+                                 'Very finicky'],
+                       'spDef': ['Strong willed', 'Somewhat vain',
+                                 'Strongly defiant', 'Hates to lose',
+                                 'Somewhat stubborn'],
+                       'spd': ['Likes to run', 'Alert to sounds',
+                               'Impetuous and silly', 'Somewhat of a clown',
+                               'Quick to flee']}
 
     def __init__(self):
         pass
@@ -48,23 +49,23 @@ class _Stats:
 
     # Generates an individual value (IV)
     def generate_ivs(self):
-        temp = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
+        temp = {'hp': 0, 'atk': 0, 'def': 0, 'spAtk': 0, 'spDef': 0, 'spd': 0}
         for k in temp:
             temp[k] = random.randint(0, 32)
-        return temp # Dictionary
+        return temp  # Dictionary
 
     # Sets stats based on IVs, EVs, and base stats
     # Formulas found at bulbapedia.bulbagarden.net/wiki/Individual_values
     def generate_stats(self, base_stats, ivs, evs, level, nature):
-        temp = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
-        for k in temp: # s being stat
+        temp = {'hp': 0, 'atk': 0, 'def': 0, 'spAtk': 0, 'spDef': 0, 'spd': 0}
+        for k in temp:  # s being stat
             if k == 'hp':
                 temp[k] = int(((2 * base_stats[k] + ivs[k] +
                                 int(evs[k]/4)) * level) / 100) + level + 10
             else:
                 temp[k] = int((int(((2 * base_stats[k] + ivs[k] + int(evs[k]/4)) * level) /
                                    100) + 5) * self._set_nature_mod(k, nature))
-        return temp # Dictionary
+        return temp  # Dictionary
 
     # Generates the Pokemons gender, default is 50/50
     def set_gender(self, chance_is_male):
@@ -142,8 +143,9 @@ class _Stats:
 # Test functionality
 def _test():
     # Charizard
-    _bs = {'hp':78, 'atk':84, 'def':78, 'spAtk':109, 'spDef':85, 'spd':100}
-    _evs = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
+    _bs = {'hp': 78, 'atk': 84, 'def': 78,
+           'spAtk': 109, 'spDef': 85, 'spd': 100}
+    _evs = {'hp': 0, 'atk': 0, 'def': 0, 'spAtk': 0, 'spDef': 0, 'spd': 0}
     _n = generate_nature()
     _ivs = generate_ivs()
     _s = generate_stats(_bs, _ivs, _evs, 50, _n)
@@ -158,7 +160,6 @@ def _test():
     print("spAtk: ", _s['spAtk'], "iv: ", _ivs['spAtk'])
     print("spDef: ", _s['spDef'], "iv: ", _ivs['spDef'])
     print("spd:   ", _s['spd'], "iv: ", _ivs['spd'])
-
 
 
 # Public package

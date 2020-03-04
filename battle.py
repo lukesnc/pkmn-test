@@ -17,12 +17,16 @@ class Battle:
                  or the wild Pokemon encountered
 
     """
-    def __init__(self, player, enemy, type):
+    
+    def __init__(self, player, enemy, battle_type):
         self.player = player
         self.enemy = enemy
-        self.type = type
+        self.type = battle_type
         self.player_pkmn = player.party[0]
-        self.enemy_pkmn = enemy.party[0]
+        try:
+            self.enemy_pkmn = enemy.party[0]
+        except:
+            self.enemy_pkmn = enemy
 
         if self.type == 'wild':
             pass
@@ -30,6 +34,7 @@ class Battle:
             pass
         else:
             raise Exception("error: not a battle type")
+        
 
     def __del__(self):
         print("Battle over.")
@@ -37,6 +42,8 @@ class Battle:
     def setup(self):
         print("Go", self.player_pkmn.get_name())
 
+
+# Test battle
 def _test():
     from trainer import Trainer
     from pokemon import Bulbasaur

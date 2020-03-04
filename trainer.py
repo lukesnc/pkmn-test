@@ -9,6 +9,7 @@ from items import *
 
 class Trainer:
     """This is what the player plays as; a Pokemon Trainer"""
+    
     def __init__(self, name, gender):
         self.name = name
         self.gender = gender
