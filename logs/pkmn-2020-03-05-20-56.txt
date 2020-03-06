@@ -1,0 +1,70 @@
+INFO:root:TRAINER
+INFO:root:Name:          Luke
+INFO:root:Gender:        M
+INFO:root:Has Pokedex:   False
+INFO:root:Trainer ID:    6471647728
+INFO:root:Bag:           {'Items': {}, 'Medicine': {<items.Medicine object at 0x00000175342A3460>: 1}, 'Balls': {<items.Ball object at 0x00000175342A39D0>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
+INFO:root:Party Pokemon: []
+INFO:root:
+
+INFO:root:POKEMON - BULBASAUR
+INFO:root:Name:           Bulbasaur
+INFO:root:Nickname:       None
+INFO:root:Pokedex #:      1
+INFO:root:Class:          Seed Pokemon
+INFO:root:Height:         0.7 m
+INFO:root:Weight:         6.9 kg
+INFO:root:Type(s):        Grass/Poison
+INFO:root:Gender:         M
+INFO:root:Nature:         Careful
+INFO:root:Ability:        Chlorophyll
+INFO:root:Ball:           Poke Ball
+INFO:root:Max HP:         11 iv: 7
+INFO:root:Attack:         6 iv: 29
+INFO:root:Defense:        6 iv: 29
+INFO:root:Sp. Attack:     5 iv: 6
+INFO:root:Sp. Defense:    6 iv: 10
+INFO:root:Speed:          5 iv: 5
+INFO:root:Level:          5
+INFO:root:Exp. Points:    1 To next: 7
+INFO:root:Moves:          ['Tackle', 'Growl']
+INFO:root:Date met:       05-03-2020 20:56
+INFO:root:Location met:   Route 1
+INFO:root:Characteristic: Quick Tempered
+INFO:root:
+
+INFO:root:TRAINER
+INFO:root:Name:          Luke
+INFO:root:Gender:        M
+INFO:root:Has Pokedex:   False
+INFO:root:Trainer ID:    3372230456
+INFO:root:Bag:           {'Items': {}, 'Medicine': {<items.Medicine object at 0x0000021F4A015850>: 1}, 'Balls': {<items.Ball object at 0x0000021F4A015910>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
+INFO:root:Party Pokemon: []
+INFO:root:
+
+INFO:root:POKEMON - BULBASAUR
+INFO:root:Name:           Bulbasaur
+INFO:root:Nickname:       None
+INFO:root:Pokedex #:      1
+INFO:root:Class:          Seed Pokemon
+INFO:root:Height:         0.7 m
+INFO:root:Weight:         6.9 kg
+INFO:root:Type(s):        Grass/Poison
+INFO:root:Gender:         M
+INFO:root:Nature:         Bashful
+INFO:root:Ability:        Chlorophyll
+INFO:root:Ball:           Poke Ball
+INFO:root:Max HP:         12 iv: 30
+INFO:root:Attack:         6 iv: 9
+INFO:root:Defense:        6 iv: 23
+INFO:root:Sp. Attack:     6 iv: 21
+INFO:root:Sp. Defense:    6 iv: 30
+INFO:root:Speed:          5 iv: 7
+INFO:root:Level:          4
+INFO:root:Exp. Points:    1 To next: 7
+INFO:root:Moves:          ['Tackle', 'Growl']
+INFO:root:Date met:       05-03-2020 20:56
+INFO:root:Location met:   Route 1
+INFO:root:Characteristic: Loves to eat
+INFO:root:
+

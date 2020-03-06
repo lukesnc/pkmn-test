@@ -5,7 +5,7 @@
 from random import randint
 import logging
 
-from items import *
+import items as itm
 
 class Trainer:
     """This is what the player plays as; a Pokemon Trainer"""
@@ -19,8 +19,8 @@ class Trainer:
         self.final_id = self._trainer_id + self.__secret_id * 65536
         # Bag and pockets {item: quantity}
         self.bag = {'Items': {},
-                    'Medicine': {potion:1},
-                    'Balls': {poke_ball:5},
+                    'Medicine': {itm.potion:1},
+                    'Balls': {itm.poke_ball:5},
                     'Battle Items': {},
                     'Key Items': ['Town Map']}
         self.party = []

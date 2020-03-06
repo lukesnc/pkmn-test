@@ -2,8 +2,8 @@ INFO:root:TRAINER
 INFO:root:Name:          Luke
 INFO:root:Gender:        M
 INFO:root:Has Pokedex:   False
-INFO:root:Trainer ID:    4356835159
-INFO:root:Bag:           {'Items': {}, 'Medicine': {<items.Medicine object at 0x7fe490058358>: 1}, 'Balls': {<items.Ball object at 0x7fe490058438>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
+INFO:root:Trainer ID:    4984911360
+INFO:root:Bag:           {'Items': {}, 'Medicine': {<items.Medicine object at 0x00000199839E5A30>: 1}, 'Balls': {<items.Ball object at 0x00000199839E5B20>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
 INFO:root:Party Pokemon: []
 INFO:root:
 
@@ -16,20 +16,20 @@ INFO:root:Height:         0.7 m
 INFO:root:Weight:         6.9 kg
 INFO:root:Type(s):        Grass/Poison
 INFO:root:Gender:         M
-INFO:root:Nature:         Quiet
-INFO:root:Ability:        Chlorophyll
+INFO:root:Nature:         Docile
+INFO:root:Ability:        Overgrow
 INFO:root:Ball:           Poke Ball
-INFO:root:Max HP:         12 iv: 20
-INFO:root:Attack:         6 iv: 5
+INFO:root:Max HP:         12 iv: 30
+INFO:root:Attack:         6 iv: 2
 INFO:root:Defense:        6 iv: 25
-INFO:root:Sp. Attack:     6 iv: 1
-INFO:root:Sp. Defense:    6 iv: 18
-INFO:root:Speed:          5 iv: 15
-INFO:root:Level:          7
+INFO:root:Sp. Attack:     6 iv: 4
+INFO:root:Sp. Defense:    6 iv: 32
+INFO:root:Speed:          6 iv: 24
+INFO:root:Level:          5
 INFO:root:Exp. Points:    1 To next: 7
 INFO:root:Moves:          ['Tackle', 'Growl']
-INFO:root:Date met:       25-02-2020 15:23
+INFO:root:Date met:       05-03-2020 20:29
 INFO:root:Location met:   Route 1
-INFO:root:Characteristic: Sturdy body
+INFO:root:Characteristic: None
 INFO:root:
 

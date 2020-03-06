@@ -121,12 +121,15 @@ class _Stats:
 
     # Gets a Pokemons characteristic based on their iv values
     def set_characteristic(self, ivs):
+        # Find highest IV
         highest_iv = 'hp'
         for k, v in ivs.items():
             if ivs[highest_iv] < v:
                 highest_iv = k
 
+        # Set characteristic based on highest IV
         for k, v in ivs.items():
+            print(k, v)
             if k == highest_iv:
                 if v in range(0, 31, 5):
                     return self.CHARACTERISTICS[k][0]

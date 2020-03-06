@@ -11,6 +11,9 @@ class Item(object):
         self.cost = int(cost)
         self.sell_price = int(cost * 0.5)
 
+    def __str__(self):
+        return str(self.name)
+
     def use(self):
         # Successfully used
         return True
