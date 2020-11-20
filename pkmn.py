@@ -26,7 +26,7 @@ class Game():
         input()
         # t = Trainer(Trainer.get_name(), Trainer.get_gender())
         me = Trainer('Luke', 'M')
-        me.log_info()
+        # me.log_info()
 
         # Test with Bulbasaur
         boy = Bulbasaur()
@@ -34,7 +34,7 @@ class Game():
         #     boy.catch(itm.ultra_ball)
         # else:
         #     print("Argh! Almost had it.")
-        boy.log_stats()
+        # boy.log_stats()
 
 if __name__ == '__main__':
     g = Game()

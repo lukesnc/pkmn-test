@@ -1,0 +1,9 @@
+INFO:root:TRAINER
+INFO:root:Name:          Luke
+INFO:root:Gender:        M
+INFO:root:Has Pokedex:   False
+INFO:root:Trainer ID:    2164652441
+INFO:root:Bag:           {'Items': {}, 'Medicine': {<lib.db.items.Medicine object at 0x7f21935da3a0>: 1}, 'Balls': {<lib.db.items.Ball object at 0x7f21935da8e0>: 5}, 'Battle Items': {}, 'Key Items': ['Town Map']}
+INFO:root:Party Pokemon: []
+INFO:root:
+

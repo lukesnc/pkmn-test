@@ -21,6 +21,9 @@ class _Stats:
     NATURE_MOD_DECREASE = 0.90
     NATURE_MOD_NONE = 1.0
 
+    STAT_TEMPLATE = {'hp': 0, 'atk': 0, 'def': 0,
+                     'spAtk': 0, 'spDef': 0, 'spd': 0}
+
     CHARACTERISTICS = {'hp': ['Loves to eat', 'Often dozes off',
                               'Often scatters things', 'Scatters things often',
                               'Likes to Relax'],
@@ -49,31 +52,27 @@ class _Stats:
 
     # Generates an individual value (IV)
     def generate_ivs(self):
-        temp = {'hp': 0, 'atk': 0, 'def': 0, 'spAtk': 0, 'spDef': 0, 'spd': 0}
-        for k in temp:
-            temp[k] = random.randint(0, 32)
-        return temp  # Dictionary
+        return {k: random.randint(0, 32) for k in self.STAT_TEMPLATE}
 
     # Sets stats based on IVs, EVs, and base stats
     # Formulas found at bulbapedia.bulbagarden.net/wiki/Individual_values
     def generate_stats(self, base_stats, ivs, evs, level, nature):
-        temp = {'hp': 0, 'atk': 0, 'def': 0, 'spAtk': 0, 'spDef': 0, 'spd': 0}
-        for k in temp:  # s being stat
-            if k == 'hp':
-                temp[k] = int(((2 * base_stats[k] + ivs[k] +
-                                int(evs[k]/4)) * level) / 100) + level + 10
-            else:
-                temp[k] = int((int(((2 * base_stats[k] + ivs[k] + int(evs[k]/4)) * level) /
-                                   100) + 5) * self._set_nature_mod(k, nature))
-        return temp  # Dictionary
+        def _gen():
+            for k in self.STAT_TEMPLATE:
+                if k == 'hp':
+                    yield k, int(((2 * base_stats[k] + ivs[k] +
+                                    int(evs[k]/4)) * level) / 100) + level + 10
+                else:
+                    yield k, int((int(((2 * base_stats[k] + ivs[k] + int(evs[k]/4)) * level) /
+                                    100) + 5) * self._set_nature_mod(k, nature))
+        return {k: v for k, v in _gen()}  # Dictionary
 
     # Generates the Pokemons gender, default is 50/50
     def set_gender(self, chance_is_male):
         try:
             if random.random() < chance_is_male:
                 return 'M'
-            else:
-                return 'F'
+            return 'F'
         except TypeError:
             return None
 
@@ -84,40 +83,35 @@ class _Stats:
                 return self.NATURE_MOD_INCREASE
             elif nature in self.NATURES[5::5]:
                 return self.NATURE_MOD_DECREASE
-            else:
-                return self.NATURE_MOD_NONE
+            return self.NATURE_MOD_NONE
 
         elif stat == 'def':
             if nature in self.NATURES[5:10] and nature != 'Docile':
                 return self.NATURE_MOD_INCREASE
             elif nature in ['Lonely', 'Hasty', 'Mild', 'Gentle']:
                 return self.NATURE_MOD_DECREASE
-            else:
-                return self.NATURE_MOD_NONE
+            return self.NATURE_MOD_NONE
 
         elif stat == 'spd':
             if nature in self.NATURES[10:15] and nature != 'Serious':
                 return self.NATURE_MOD_INCREASE
             elif nature in ['Brave', 'Relaxed', 'Quiet', 'Sassy']:
                 return self.NATURE_MOD_DECREASE
-            else:
-                return self.NATURE_MOD_NONE
+            return self.NATURE_MOD_NONE
 
         elif stat == 'spAtk':
             if nature in self.NATURES[15:20] and nature != 'Bashful':
                 return self.NATURE_MOD_INCREASE
             elif nature in ['Adamant', 'Impish', 'Jolly', 'Careful']:
                 return self.NATURE_MOD_DECREASE
-            else:
-                return self.NATURE_MOD_NONE
+            return self.NATURE_MOD_NONE
 
         elif stat == 'spDef':
             if nature in self.NATURES[20:24]:
                 return self.NATURE_MOD_INCREASE
             elif nature in self.NATURES[4::5] and nature != 'Quirky':
                 return self.NATURE_MOD_DECREASE
-            else:
-                return self.NATURE_MOD_NONE
+            return self.NATURE_MOD_NONE
 
     # Gets a Pokemons characteristic based on their iv values
     def set_characteristic(self, ivs):
@@ -129,7 +123,6 @@ class _Stats:
 
         # Set characteristic based on highest IV
         for k, v in ivs.items():
-            print(k, v)
             if k == highest_iv:
                 if v in range(0, 31, 5):
                     return self.CHARACTERISTICS[k][0]
