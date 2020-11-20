@@ -7,7 +7,7 @@ from datetime import datetime
 import logging
 
 import types
-from stats import *
+from lib.core.stats import *
 
 class Pokemon(object):
     """

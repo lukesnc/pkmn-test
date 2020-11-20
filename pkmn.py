@@ -8,11 +8,11 @@ import sys
 from datetime import datetime
 import logging
 
-from pokemon import Bulbasaur
-from trainer import Trainer
-import items as itm
-import moves
-import stats
+from lib.db.pokemon import Bulbasaur
+from lib.core.trainer import Trainer
+import lib.db.items as itm
+import lib.db.moves
+import lib.core.stats
 
 # Global vars
 LOG_PATH = './logs/pkmn-' + datetime.now().strftime("%Y-%m-%d-%H-%M") + '.txt'

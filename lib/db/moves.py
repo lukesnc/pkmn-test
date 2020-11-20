@@ -4,7 +4,7 @@
 # Imports
 from random import random
 
-from battlestatus import *
+from lib.db.battlestatus import *
 
 # Attack moves class
 class Move(object):

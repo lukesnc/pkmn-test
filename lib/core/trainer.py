@@ -5,7 +5,7 @@
 from random import randint
 import logging
 
-import items as itm
+import lib.db.items as itm
 
 class Trainer:
     """This is what the player plays as; a Pokemon Trainer"""

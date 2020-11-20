@@ -5,7 +5,7 @@
 import random
 
 import types
-from pkmnbase import Pokemon
+from lib.core.pkmnbase import Pokemon
 
 class Bulbasaur(Pokemon):
     # Attributes / stats
