@@ -17,6 +17,9 @@ class Move(object):
         self.power = mv_pow
         self.accuracy = acc
 
+    def __str__(self):
+        return str(self.name)
+
     def use(self):
         if random() < self.accuracy and self.pp > 0:
             self.pp -= 1

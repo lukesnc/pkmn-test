@@ -25,16 +25,29 @@ class Trainer:
                     'Key Items': ['Town Map']}
         self.party = []
 
+    def __str__(self):
+        return str(self.name)
+
+    def _use_item(self, category, item):
+        self.bag[category][item] -= 1
+        if self.bag[category][item] == 0:
+            self.bag[category].pop(item)
+
     def _throw_ball(self, ball, pkmn):
-        if self.bag['Balls'][ball] > 0:
-            self.bag['Balls'][ball] -= 1
-            # catch calculations
+        # Check that trainer has one of the desired ball
+        if ball in self.bag['Balls'] and self.bag['Balls'][ball] > 0:
+            self._use_item('Balls', ball)
+            # If catch successful
+            # if boy.use()
+            return True
+        # Fail
+        return False
+
 
     def throw_ball(self, ball, pkmn):
         if self._throw_ball(ball, pkmn):
             return True
-        else:
-            return False
+        return False
 
     def add_to_party(self, pkmn):
         self.party.append(pkmn)

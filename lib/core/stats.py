@@ -61,10 +61,10 @@ class _Stats:
             for k in self.STAT_TEMPLATE:
                 if k == 'hp':
                     yield k, int(((2 * base_stats[k] + ivs[k] +
-                                    int(evs[k]/4)) * level) / 100) + level + 10
+                                   int(evs[k]/4)) * level) / 100) + level + 10
                 else:
                     yield k, int((int(((2 * base_stats[k] + ivs[k] + int(evs[k]/4)) * level) /
-                                    100) + 5) * self._set_nature_mod(k, nature))
+                                      100) + 5) * self._set_nature_mod(k, nature))
         return {k: v for k, v in _gen()}  # Dictionary
 
     # Generates the Pokemons gender, default is 50/50

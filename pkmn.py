@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-
 # Pokemon combat and creature system test
 # Author: Luke Simone
 
 # Imports
 import sys
-from datetime import datetime
-import logging
+if sys.version_info < (3, 0):
+    sys.stderr.write("Requires Python 3.x\n")
+    sys.exit(1)
 
 from lib.db.pokemon import Bulbasaur
 from lib.core.trainer import Trainer
@@ -14,9 +14,6 @@ import lib.db.items as itm
 import lib.db.moves
 import lib.core.stats
 
-# Global vars
-LOG_PATH = './logs/pkmn-' + datetime.now().strftime("%Y-%m-%d-%H-%M") + '.txt'
-logging.basicConfig(filename=LOG_PATH, level=logging.INFO)
 
 class Game():
     def __init__(self):
@@ -24,16 +21,14 @@ class Game():
         input()
         print("Why don't you tell me a little bit about yourself.")
         input()
-        # t = Trainer(Trainer.get_name(), Trainer.get_gender())
+        name, gender = Trainer.get_name(), Trainer.get_gender()
+        player = Trainer(name, gender)
         me = Trainer('Luke', 'M')
-        # me.log_info()
 
         # Test with Bulbasaur
         boy = Bulbasaur()
-        # if me.throw_ball(itm.ultra_ball, boy):
-        #     boy.catch(itm.ultra_ball)
-        # else:
-        #     print("Argh! Almost had it.")
+        if me.throw_ball(itm.poke_ball, boy):
+            boy.catch(itm.ultra_ball)
         # boy.log_stats()
 
 if __name__ == '__main__':

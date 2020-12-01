@@ -4,7 +4,7 @@
 # Imports
 import random
 
-import types
+import lib.db.types
 from lib.core.pkmnbase import Pokemon
 
 class Bulbasaur(Pokemon):

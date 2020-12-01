@@ -59,10 +59,13 @@ class Pokemon(object):
         self._status = None
         self._held_item = None
 
-    def get_name(self):
+    def __str__(self):
         if self._nickname is not None:
             return self._nickname
         return self._name
+
+    def __int__(self):
+        return int(self._pokedex_num)
 
     def _set_exp(self, extra_points=0):
         self._exp = pow(self.level, 3) + extra_points
