@@ -6,7 +6,7 @@ import random
 from datetime import datetime
 import logging
 
-import types
+import lib.db.types
 from lib.core.stats import *
 
 class Pokemon(object):

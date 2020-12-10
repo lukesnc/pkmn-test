@@ -13,7 +13,7 @@ from lib.core.trainer import Trainer
 import lib.db.items as itm
 import lib.db.moves
 import lib.core.stats
-
+import lib.core.battle as bttl
 
 class Game():
     def __init__(self):
@@ -21,8 +21,8 @@ class Game():
         input()
         print("Why don't you tell me a little bit about yourself.")
         input()
-        name, gender = Trainer.get_name(), Trainer.get_gender()
-        player = Trainer(name, gender)
+        # name, gender = Trainer.get_name(), Trainer.get_gender()
+        # player = Trainer(name, gender)
         me = Trainer('Luke', 'M')
 
         # Test with Bulbasaur
@@ -31,6 +31,12 @@ class Game():
             boy.catch(itm.ultra_ball)
         # boy.log_stats()
 
+        # Test battle
+        bttl.test()
+
 if __name__ == '__main__':
-    g = Game()
+    try:
+        g = Game()
+    except KeyboardInterrupt:
+        sys.stderr.write("\nQuitting...\n")
     sys.exit()
