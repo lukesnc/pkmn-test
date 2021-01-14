@@ -1,8 +1,9 @@
 # Class file for battle system
 # Author: Luke Simone
 
-# Imports
 import random
+
+from lib.pokemon.status import *
 
 class Battle:
     """
@@ -15,32 +16,49 @@ class Battle:
     enemy:       The enemy's trainer object
     enemy_pkmn:  The enemy's first party Pokemon, whoever is switched in,
                  or the wild Pokemon encountered
-
     """
-    
-    def __init__(self, player, enemy, battle_type):
+
+    def __init__(self, player, enemy, wild=True):
         self.player = player
         self.enemy = enemy
-        self.type = battle_type
+        self.wild = wild
         self.player_pkmn = player.party[0]
         try:
             self.enemy_pkmn = enemy.party[0]
         except AttributeError:
             self.enemy_pkmn = enemy
+        self.finished = False
+        self.turn = 0
 
-        if self.type == 'wild':
-            pass
-        elif self.type == 'battle':
-            pass
-        else:
-            raise Exception("error: not a battle type")
-        
+    def fight(self):
+        self.setup()
+        while not self.finished:
+            # Determine first turn
+            order = [self.player_pkmn, self.enemy_pkmn]
+            if self.player_pkmn.stats['spd'] < self.enemy_pkmn.stats['spd']:
+                order.reverse()
 
-    def __del__(self):
-        print("Battle over.")
+            # Battle turns
+            raise NotImplementedError
+
+
+
+            # Check for certain status effects
+            for pkmn in order:
+                if pkmn.status == Poison:
+                    pkmn.hp -= pkmn.hp * Poison.damage_percent
+
+            # End of turn
+            self.turn += 1
+
+    def display_options(self):
+        print()
 
     def setup(self):
         print("Go", self.player_pkmn.get_name())
+
+    def __del__(self):
+        print("Battle over.")
 
 
 # Test battle
@@ -51,5 +69,5 @@ def test():
     _my_b = Bulbasaur()
     _p.party.append(_my_b)
     _e = Bulbasaur()
-    _b = Battle(_p, _e, 'wild')
+    _b = Battle(_p, _e, wild=True)
     del _b, _p, _my_b, _e

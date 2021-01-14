@@ -34,32 +34,33 @@ class Pokemon(object):
 
     def __init__(self):
         # Set stats
+        self.level = 1
+        self.moves = []
+        self._nickname = None
+
         self._nature = generate_nature()
         self.ability = random.choice(self._abilities)
-        self._ivs = generate_ivs()
         self.gender = set_gender(self._chance_is_male)
+
+        self._ivs = generate_ivs()
         self._evs = {'hp': 0, 'atk': 0, 'def': 0,
                      'spAtk': 0, 'spDef': 0, 'spd': 0}
-        self.level = 1
         self._exp = None
         self._exp_to_next_lvl = None
         self._set_exp()
-        self.moves = []
-        self._nickname = None
-        self._ball = 'Poke Ball'
-
-        # Must come last
-        self._stats = generate_stats(self._base_stats, self._ivs, self._evs,
+        self.stats = generate_stats(self._base_stats, self._ivs, self._evs,
                                      self.level, self._nature)
 
         # Trainer info
         self._date_met = datetime.now().strftime("%d-%m-%Y %H:%M")
         self._location_met = 'Route 1'
+        self._ball = 'Poke Ball'
         self._characteristic = set_characteristic(self._ivs)
 
         # Battle status (asleep, confused, etc.)
-        self._status = None
-        self._held_item = None
+        self.status = None
+        self.held_item = None
+        self.hp = self.stats['hp']
 
     def __str__(self):
         if self._nickname is not None:
@@ -101,39 +102,33 @@ class Pokemon(object):
         else:
             self._exp_to_next_lvl -= points
 
-    def set_status(self, status):
-        self._status = status
-
-    def set_held_item(self, item=None):
-        self._held_item = item
-
     def _level_up(self):
         self.level += 1
         print(self._name, "grew to Lv.", str(self.level) + "!")
 
-        old_hp = self._stats['hp']
-        old_atk = self._stats['atk']
-        old_def = self._stats['def']
-        old_sp_atk = self._stats['spAtk']
-        old_sp_def = self._stats['spDef']
-        old_spd = self._stats['spd']
-        self._stats = generate_stats(self._base_stats, self._ivs, self._evs,
+        old_hp = self.stats['hp']
+        old_atk = self.stats['atk']
+        old_def = self.stats['def']
+        old_sp_atk = self.stats['spAtk']
+        old_sp_def = self.stats['spDef']
+        old_spd = self.stats['spd']
+        self.stats = generate_stats(self._base_stats, self._ivs, self._evs,
                                      self.level, self._nature)
 
         input()
-        print("Max HP    +" + str(self._stats['hp'] - old_hp))
-        print("Attack    +" + str(self._stats['atk'] - old_atk))
-        print("Defense   +" + str(self._stats['def'] - old_def))
-        print("Sp. Atk   +" + str(self._stats['spAtk'] - old_sp_atk))
-        print("Sp. Def   +" + str(self._stats['spDef'] - old_sp_def))
-        print("Speed     +" + str(self._stats['spd'] - old_spd))
+        print("Max HP    +" + str(self.stats['hp'] - old_hp))
+        print("Attack    +" + str(self.stats['atk'] - old_atk))
+        print("Defense   +" + str(self.stats['def'] - old_def))
+        print("Sp. Atk   +" + str(self.stats['spAtk'] - old_sp_atk))
+        print("Sp. Def   +" + str(self.stats['spDef'] - old_sp_def))
+        print("Speed     +" + str(self.stats['spd'] - old_spd))
         input()
-        print("Max HP    " + str(self._stats['hp']))
-        print("Attack    " + str(self._stats['atk']))
-        print("Defense   " + str(self._stats['def']))
-        print("Sp. Atk   " + str(self._stats['spAtk']))
-        print("Sp. Def   " + str(self._stats['spDef']))
-        print("Speed     " + str(self._stats['spd']))
+        print("Max HP    " + str(self.stats['hp']))
+        print("Attack    " + str(self.stats['atk']))
+        print("Defense   " + str(self.stats['def']))
+        print("Sp. Atk   " + str(self.stats['spAtk']))
+        print("Sp. Def   " + str(self.stats['spDef']))
+        print("Speed     " + str(self.stats['spd']))
 
     def log_stats(self):
         logging.info("POKEMON - %s", self._name.upper())
@@ -149,17 +144,17 @@ class Pokemon(object):
         logging.info("Ability:        %s", self.ability)
         logging.info("Ball:           %s", self._ball)
         logging.info("Max HP:         %s iv: %s",
-                     self._stats['hp'], self._ivs['hp'])
+                     self.stats['hp'], self._ivs['hp'])
         logging.info("Attack:         %s iv: %s",
-                     self._stats['atk'], self._ivs['atk'])
+                     self.stats['atk'], self._ivs['atk'])
         logging.info("Defense:        %s iv: %s",
-                     self._stats['def'], self._ivs['def'])
+                     self.stats['def'], self._ivs['def'])
         logging.info("Sp. Attack:     %s iv: %s",
-                     self._stats['spAtk'], self._ivs['spAtk'])
+                     self.stats['spAtk'], self._ivs['spAtk'])
         logging.info("Sp. Defense:    %s iv: %s",
-                     self._stats['spDef'], self._ivs['spDef'])
+                     self.stats['spDef'], self._ivs['spDef'])
         logging.info("Speed:          %s iv: %s",
-                     self._stats['spd'], self._ivs['spd'])
+                     self.stats['spd'], self._ivs['spd'])
         logging.info("Level:          %s", self.level)
         logging.info("Exp. Points:    %s To next: %s",
                      self._exp, self._exp_to_next_lvl)
@@ -170,10 +165,10 @@ class Pokemon(object):
         logging.info("\n")
 
     def fight(self):
-        pass
+        raise NotImplementedError
 
     def run(self):
-        pass
+        raise NotImplementedError
 
     def give_item(self, item):
-        pass
+        raise NotImplementedError

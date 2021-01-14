@@ -11,6 +11,7 @@ class StatDown:
 
 
 class Poison:
+    damage_percent = 1/16
     def __init__(self, is_bad):
         self.is_bad = is_bad
 
@@ -19,6 +20,8 @@ class Paralyze:
     pass
 
 # Test functionality
+
+
 def _test(battle_stat):
     pass
 
