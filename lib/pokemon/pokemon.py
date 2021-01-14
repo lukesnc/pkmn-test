@@ -4,7 +4,7 @@
 import random
 
 from .types import *
-from .base import Pokemon
+from .model import Pokemon
 
 
 class Bulbasaur(Pokemon):

@@ -4,7 +4,7 @@
 import random
 import os
 
-import lib.pokemon.status as status
+import lib.pokemon.statuscondition as condition
 
 class Battle(object):
     """
@@ -34,7 +34,7 @@ class Battle(object):
         self.turn = 0
 
         # Begin battle
-        self.setup()
+        self.intro()
         while not self.finished:
             # Determine first turn
             order = [self.player_pkmn, self.enemy_pkmn]
@@ -56,8 +56,8 @@ class Battle(object):
 
             # Check for certain status effects
             for pkmn in order:
-                if pkmn.status == status.Poison:
-                    pkmn.hp -= pkmn.hp * status.Poison.damage_percent
+                if pkmn.status_condition == condition.Poison:
+                    pkmn.hp -= pkmn.hp * condition.Poison.damage_percent
 
             # End of turn
             self.turn += 1
@@ -77,8 +77,8 @@ class Battle(object):
     def display_battle_stats(self):
         for pkmn in (self.enemy_pkmn, self.player_pkmn):
             print(f"{str(pkmn)}{pkmn.gender} Lv{pkmn.level}")
-            _status = "" if pkmn.status is None else f"({str(pkmn.status)})"
-            print(f"{_status} HP: {pkmn.hp} / {pkmn.stats['hp']}\n")
+            _sc = "" if pkmn.status_condition is None else f"({str(pkmn.status_condition)})"
+            print(f"{_sc} HP: {pkmn.hp} / {pkmn.stats['hp']}\n")
         
     def get_choice(self):
         while True:
@@ -92,9 +92,13 @@ class Battle(object):
             except:
                 os.system('clear')
 
-    def setup(self):
+    def intro(self):
         os.system('clear')
-        print("\n==========================")
+        print("\n" + "=" * 30)
+        if self.wild:
+            print(f"A wild {str(self.enemy)} appeared!")
+        else:
+            print(f"You are challenged by {str(self.enemy)}.")
         print(f"Go {str(self.player_pkmn)}!\n")
 
     def __del__(self):

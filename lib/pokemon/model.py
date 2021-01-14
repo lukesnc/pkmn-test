@@ -58,7 +58,7 @@ class Pokemon(object):
         self._characteristic = set_characteristic(self._ivs)
 
         # Battle status (asleep, confused, etc.)
-        self.status = None
+        self.status_condition = None
         self.held_item = None
         self.hp = self.stats['hp']
 

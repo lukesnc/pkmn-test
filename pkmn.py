@@ -9,7 +9,7 @@ if sys.version_info < (3, 6):
 
 from lib.pokemon import Bulbasaur
 from lib.trainer import Trainer
-import lib.items as itm
+import lib.items as item
 import lib.pokemon.moves
 import lib.battle as battle
 
@@ -25,8 +25,8 @@ class Game():
 
         # Test with Bulbasaur
         boy = Bulbasaur()
-        if me.throw_ball(itm.PokeBall, boy):
-            boy.catch(itm.UltraBall)
+        if me.throw_ball(item.PokeBall, boy):
+            boy.catch(item.UltraBall)
         # boy.log_stats()
 
         # Test battle

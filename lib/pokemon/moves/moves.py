@@ -2,7 +2,7 @@
 # Author: Luke Simone
 
 from .base import Move, StatusMove
-from lib.pokemon.status import StatDown, Poison
+from lib.pokemon.statuscondition import StatDown, Poison
 
 Pound = Move(1, 'Pound', 'Normal', 'Physical', 35, 40, 1.0)
 Tackle = Move(33, 'Tackle', 'Normal', 'Physical', 35, 40, 1.0)
