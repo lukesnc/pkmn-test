@@ -3,8 +3,8 @@
 # Author: Luke Simone
 
 import sys
-if sys.version_info < (3, 0):
-    sys.stderr.write("Requires Python 3.x\n")
+if sys.version_info < (3, 6):
+    sys.stderr.write("Requires Python 3.6 or above\n")
     sys.exit(1)
 
 from lib.pokemon import Bulbasaur
@@ -30,7 +30,7 @@ class Game():
         # boy.log_stats()
 
         # Test battle
-        battle.test()
+        battle.test(boy)
 
 if __name__ == '__main__':
     try:

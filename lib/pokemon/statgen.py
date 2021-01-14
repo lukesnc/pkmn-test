@@ -70,8 +70,8 @@ class _Stats:
     def set_gender(self, chance_is_male):
         try:
             if random.random() < chance_is_male:
-                return 'M'
-            return 'F'
+                return '♂'
+            return '♀'
         except TypeError:
             return None
 

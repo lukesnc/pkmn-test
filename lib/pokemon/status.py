@@ -15,9 +15,13 @@ class Poison:
     def __init__(self, is_bad):
         self.is_bad = is_bad
 
+    def __str__(self):
+        return 'PSN'
+
 
 class Paralyze:
-    pass
+    def __str__(self):
+        return 'PAR'
 
 # Test functionality
 
