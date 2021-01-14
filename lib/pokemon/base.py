@@ -5,7 +5,7 @@ import random
 from datetime import datetime
 import logging
 
-from .types import nonetype
+from .types import NoneType
 from .statgen import *
 
 
@@ -20,7 +20,7 @@ class Pokemon(object):
     _name = ''
     _classification = ''
     _pokedex_num = None
-    _type = [nonetype]
+    _type = [NoneType]
     _chance_is_male = 0.5
     _height = 0  # m
     _weight = 0  # kg

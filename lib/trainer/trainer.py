@@ -18,8 +18,8 @@ class Trainer:
         self.final_id = self._trainer_id + self.__secret_id * 65536
         # Bag and pockets {item: quantity}
         self.bag = {'Items': {},
-                    'Medicine': {itm.potion:1},
-                    'Balls': {itm.poke_ball:5},
+                    'Medicine': {itm.Potion:1},
+                    'Balls': {itm.PokeBall:5},
                     'Battle Items': {},
                     'Key Items': ['Town Map']}
         self.party = []

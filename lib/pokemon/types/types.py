@@ -3,13 +3,13 @@
 
 from .base import Type as _Type
 
-nonetype = _Type(
+NoneType = _Type(
     name='???',
     attack_type=None,
     defend_type=None
 )
 
-fire = _Type(
+Fire = _Type(
     name='Fire',
     attack_type={},
     defend_type={}

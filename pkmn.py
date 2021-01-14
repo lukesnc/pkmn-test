@@ -25,8 +25,8 @@ class Game():
 
         # Test with Bulbasaur
         boy = Bulbasaur()
-        if me.throw_ball(itm.poke_ball, boy):
-            boy.catch(itm.ultra_ball)
+        if me.throw_ball(itm.PokeBall, boy):
+            boy.catch(itm.UltraBall)
         # boy.log_stats()
 
         # Test battle
