@@ -2,7 +2,6 @@
 # Pokemon combat and creature system test
 # Author: Luke Simone
 
-# Imports
 import sys
 if sys.version_info < (3, 0):
     sys.stderr.write("Requires Python 3.x\n")
