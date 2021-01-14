@@ -1,13 +1,13 @@
 # Class file for Pokemon structure
 # Author: Luke Simone
 
-# Imports
 import random
 from datetime import datetime
 import logging
 
-import lib.db.types
-from lib.core.stats import *
+from .types import nonetype
+from .statgen import *
+
 
 class Pokemon(object):
     """
@@ -20,16 +20,17 @@ class Pokemon(object):
     _name = ''
     _classification = ''
     _pokedex_num = None
-    _type = '???'
+    _type = [nonetype]
     _chance_is_male = 0.5
-    _height = 0 #m
-    _weight = 0 #kg
+    _height = 0  # m
+    _weight = 0  # kg
     _base_egg_steps = 0
-    _base_stats = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
+    _base_stats = {'hp': 0, 'atk': 0, 'def': 0,
+                   'spAtk': 0, 'spDef': 0, 'spd': 0}
     _evolution = 0
     _abilities = []
     capture_rate = 0
-    ev_earned = {'stat':0}
+    ev_earned = {'stat': 0}
 
     def __init__(self):
         # Set stats
@@ -37,7 +38,8 @@ class Pokemon(object):
         self.ability = random.choice(self._abilities)
         self._ivs = generate_ivs()
         self.gender = set_gender(self._chance_is_male)
-        self._evs = {'hp':0, 'atk':0, 'def':0, 'spAtk':0, 'spDef':0, 'spd':0}
+        self._evs = {'hp': 0, 'atk': 0, 'def': 0,
+                     'spAtk': 0, 'spDef': 0, 'spd': 0}
         self.level = 1
         self._exp = None
         self._exp_to_next_lvl = None
@@ -78,7 +80,8 @@ class Pokemon(object):
         print("Successfully caught", self._name + '!')
         # Take catch args
         self._ball = ball.name
-        choice = input("Give " + self._name + " a nickname? [yes/no] ").lower().strip()
+        choice = input("Give " + self._name +
+                       " a nickname? [yes/no] ").lower().strip()
         if choice == 'yes':
             nickname = input("Enter nickname: ").strip()
             if len(nickname) > 10:
@@ -145,14 +148,21 @@ class Pokemon(object):
         logging.info("Nature:         %s", self._nature)
         logging.info("Ability:        %s", self.ability)
         logging.info("Ball:           %s", self._ball)
-        logging.info("Max HP:         %s iv: %s", self._stats['hp'], self._ivs['hp'])
-        logging.info("Attack:         %s iv: %s", self._stats['atk'], self._ivs['atk'])
-        logging.info("Defense:        %s iv: %s", self._stats['def'], self._ivs['def'])
-        logging.info("Sp. Attack:     %s iv: %s", self._stats['spAtk'], self._ivs['spAtk'])
-        logging.info("Sp. Defense:    %s iv: %s", self._stats['spDef'], self._ivs['spDef'])
-        logging.info("Speed:          %s iv: %s", self._stats['spd'], self._ivs['spd'])
+        logging.info("Max HP:         %s iv: %s",
+                     self._stats['hp'], self._ivs['hp'])
+        logging.info("Attack:         %s iv: %s",
+                     self._stats['atk'], self._ivs['atk'])
+        logging.info("Defense:        %s iv: %s",
+                     self._stats['def'], self._ivs['def'])
+        logging.info("Sp. Attack:     %s iv: %s",
+                     self._stats['spAtk'], self._ivs['spAtk'])
+        logging.info("Sp. Defense:    %s iv: %s",
+                     self._stats['spDef'], self._ivs['spDef'])
+        logging.info("Speed:          %s iv: %s",
+                     self._stats['spd'], self._ivs['spd'])
         logging.info("Level:          %s", self.level)
-        logging.info("Exp. Points:    %s To next: %s", self._exp, self._exp_to_next_lvl)
+        logging.info("Exp. Points:    %s To next: %s",
+                     self._exp, self._exp_to_next_lvl)
         logging.info("Moves:          %s", self.moves)
         logging.info("Date met:       %s", self._date_met)
         logging.info("Location met:   %s", self._location_met)

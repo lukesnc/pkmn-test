@@ -1,7 +1,6 @@
 # File stat constants and calculations
 # Author: Luke Simone
 
-# Imports
 import random
 
 __all__ = ['generate_nature', 'generate_ivs', 'generate_stats',

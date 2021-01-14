@@ -4,13 +4,16 @@
 class StatUp:
     pass
 
+
 class StatDown:
     def __init__(self, target, stat):
         pass
 
+
 class Poison:
     def __init__(self, is_bad):
         self.is_bad = is_bad
+
 
 class Paralyze:
     pass
@@ -18,6 +21,7 @@ class Paralyze:
 # Test functionality
 def _test(battle_stat):
     pass
+
 
 if __name__ == '__main__':
     _poison = Poison(is_bad=True)

@@ -1,11 +1,10 @@
 # File containing the class for the Trainer (the player)
 # Author: Luke Simone
 
-# Imports
 from random import randint
 import logging
 
-import lib.db.items as itm
+import lib.items as itm
 
 class Trainer:
     """This is what the player plays as; a Pokemon Trainer"""

@@ -8,12 +8,11 @@ if sys.version_info < (3, 0):
     sys.stderr.write("Requires Python 3.x\n")
     sys.exit(1)
 
-from lib.db.pokemon import Bulbasaur
-from lib.core.trainer import Trainer
-import lib.db.items as itm
-import lib.db.moves
-import lib.core.stats
-import lib.core.battle as bttl
+from lib.pokemon import Bulbasaur
+from lib.trainer import Trainer
+import lib.items as itm
+import lib.pokemon.moves
+import lib.battle as battle
 
 class Game():
     def __init__(self):
@@ -32,7 +31,7 @@ class Game():
         # boy.log_stats()
 
         # Test battle
-        bttl.test()
+        battle.test()
 
 if __name__ == '__main__':
     try:

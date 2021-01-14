@@ -45,8 +45,8 @@ class Battle:
 
 # Test battle
 def test():
-    from lib.core.trainer import Trainer
-    from lib.db.pokemon import Bulbasaur
+    from lib.trainer import Trainer
+    from lib.pokemon import Bulbasaur
     _p = Trainer('Test', 'F')
     _my_b = Bulbasaur()
     _p.party.append(_my_b)
