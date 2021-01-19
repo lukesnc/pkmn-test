@@ -109,9 +109,12 @@ class Battle(object):
 def test(pkmn):
     from lib.trainer import Trainer
     from lib.pokemon import Bulbasaur
+
     _p = Trainer('Test', 'F')
     _my_b = pkmn
     _p.party.append(_my_b)
     _e = Bulbasaur()
+
     _b = Battle(_p, _e, wild=True)
+    
     del _b, _p, _my_b, _e

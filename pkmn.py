@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # Pokemon combat and creature system test
 # Author: Luke Simone
 
@@ -10,7 +10,6 @@ if sys.version_info < (3, 6):
 from lib.pokemon import Bulbasaur
 from lib.trainer import Trainer
 import lib.items as item
-import lib.pokemon.moves
 import lib.battle as battle
 
 class Game():
